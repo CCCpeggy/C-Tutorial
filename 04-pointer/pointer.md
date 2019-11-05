@@ -794,14 +794,36 @@ int* searchValueInArray(int * arr, int arrSize, int value){
 ### array與pointer不一樣的特性
 
 ``` c
-#include <stdio.h> 
+#include <stdio.h>
 
 int main(){
     int arr[] = {111};
     int *ptr;
 
     ptr = arr; // 這是合法
+    
+    int arr2[] = arr; // 這是不合法
     arr = ptr; // 這是不合法
 }
 ```
 
+<!-- slide -->
+### array與pointer不一樣的特性2
+
+``` c
+#include <stdio.h>
+int main(){
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int *ptr = arr;
+
+    printf("sizeof(array): %d\n", sizeof(arr));
+    printf("sizeof(pointer): %d\n", sizeof(ptr));
+}
+
+```
+
+<!-- slide -->
+``` text
+> sizeof(array): 40
+> sizeof(pointer): 4
+```

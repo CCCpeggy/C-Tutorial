@@ -1,0 +1,2859 @@
+<!DOCTYPE html><html><head>
+      <title>pointer</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <style>
+      /*!
+ * reveal.js
+ * http://revealjs.com
+ * MIT licensed
+ *
+ * Copyright (C) 2018 Hakim El Hattab, http://hakim.se
+ */
+/*********************************************
+ * RESET STYLES
+ *********************************************/
+html, body, .reveal div, .reveal span, .reveal applet, .reveal object, .reveal iframe,
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6, .reveal p, .reveal blockquote, .reveal pre,
+.reveal a, .reveal abbr, .reveal acronym, .reveal address, .reveal big, .reveal cite, .reveal code,
+.reveal del, .reveal dfn, .reveal em, .reveal img, .reveal ins, .reveal kbd, .reveal q, .reveal s, .reveal samp,
+.reveal small, .reveal strike, .reveal strong, .reveal sub, .reveal sup, .reveal tt, .reveal var,
+.reveal b, .reveal u, .reveal center,
+.reveal dl, .reveal dt, .reveal dd, .reveal ol, .reveal ul, .reveal li,
+.reveal fieldset, .reveal form, .reveal label, .reveal legend,
+.reveal table, .reveal caption, .reveal tbody, .reveal tfoot, .reveal thead, .reveal tr, .reveal th, .reveal td,
+.reveal article, .reveal aside, .reveal canvas, .reveal details, .reveal embed,
+.reveal figure, .reveal figcaption, .reveal footer, .reveal header, .reveal hgroup,
+.reveal menu, .reveal nav, .reveal output, .reveal ruby, .reveal section, .reveal summary,
+.reveal time, .reveal mark, .reveal audio, .reveal video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  /* font: inherit; */
+  vertical-align: baseline; }
+
+.reveal article, .reveal aside, .reveal details, .reveal figcaption, .reveal figure,
+.reveal footer, .reveal header, .reveal hgroup, .reveal menu, .reveal nav, .reveal section {
+  display: block; }
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+body {
+  position: relative;
+  line-height: 1;
+  background-color: #fff;
+  color: #000; }
+
+/*********************************************
+ * VIEW FRAGMENTS
+ *********************************************/
+.reveal .slides section .fragment {
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s ease; }
+  .reveal .slides section .fragment.visible {
+    opacity: 1;
+    visibility: inherit; }
+
+.reveal .slides section .fragment.grow {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.grow.visible {
+    -webkit-transform: scale(1.3);
+            transform: scale(1.3); }
+
+.reveal .slides section .fragment.shrink {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.shrink.visible {
+    -webkit-transform: scale(0.7);
+            transform: scale(0.7); }
+
+.reveal .slides section .fragment.zoom-in {
+  -webkit-transform: scale(0.1);
+          transform: scale(0.1); }
+  .reveal .slides section .fragment.zoom-in.visible {
+    -webkit-transform: none;
+            transform: none; }
+
+.reveal .slides section .fragment.fade-out {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.fade-out.visible {
+    opacity: 0;
+    visibility: hidden; }
+
+.reveal .slides section .fragment.semi-fade-out {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.semi-fade-out.visible {
+    opacity: 0.5;
+    visibility: inherit; }
+
+.reveal .slides section .fragment.strike {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.strike.visible {
+    text-decoration: line-through; }
+
+.reveal .slides section .fragment.fade-up {
+  -webkit-transform: translate(0, 20%);
+          transform: translate(0, 20%); }
+  .reveal .slides section .fragment.fade-up.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .slides section .fragment.fade-down {
+  -webkit-transform: translate(0, -20%);
+          transform: translate(0, -20%); }
+  .reveal .slides section .fragment.fade-down.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .slides section .fragment.fade-right {
+  -webkit-transform: translate(-20%, 0);
+          transform: translate(-20%, 0); }
+  .reveal .slides section .fragment.fade-right.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .slides section .fragment.fade-left {
+  -webkit-transform: translate(20%, 0);
+          transform: translate(20%, 0); }
+  .reveal .slides section .fragment.fade-left.visible {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+.reveal .slides section .fragment.fade-in-then-out,
+.reveal .slides section .fragment.current-visible {
+  opacity: 0;
+  visibility: hidden; }
+  .reveal .slides section .fragment.fade-in-then-out.current-fragment,
+  .reveal .slides section .fragment.current-visible.current-fragment {
+    opacity: 1;
+    visibility: inherit; }
+
+.reveal .slides section .fragment.fade-in-then-semi-out {
+  opacity: 0;
+  visibility: hidden; }
+  .reveal .slides section .fragment.fade-in-then-semi-out.visible {
+    opacity: 0.5;
+    visibility: inherit; }
+  .reveal .slides section .fragment.fade-in-then-semi-out.current-fragment {
+    opacity: 1;
+    visibility: inherit; }
+
+.reveal .slides section .fragment.highlight-red,
+.reveal .slides section .fragment.highlight-current-red,
+.reveal .slides section .fragment.highlight-green,
+.reveal .slides section .fragment.highlight-current-green,
+.reveal .slides section .fragment.highlight-blue,
+.reveal .slides section .fragment.highlight-current-blue {
+  opacity: 1;
+  visibility: inherit; }
+
+.reveal .slides section .fragment.highlight-red.visible {
+  color: #ff2c2d; }
+
+.reveal .slides section .fragment.highlight-green.visible {
+  color: #17ff2e; }
+
+.reveal .slides section .fragment.highlight-blue.visible {
+  color: #1b91ff; }
+
+.reveal .slides section .fragment.highlight-current-red.current-fragment {
+  color: #ff2c2d; }
+
+.reveal .slides section .fragment.highlight-current-green.current-fragment {
+  color: #17ff2e; }
+
+.reveal .slides section .fragment.highlight-current-blue.current-fragment {
+  color: #1b91ff; }
+
+/*********************************************
+ * DEFAULT ELEMENT STYLES
+ *********************************************/
+/* Fixes issue in Chrome where italic fonts did not appear when printing to PDF */
+.reveal:after {
+  content: '';
+  font-style: italic; }
+
+.reveal iframe {
+  z-index: 1; }
+
+/** Prevents layering issues in certain browser/transition combinations */
+.reveal a {
+  position: relative; }
+
+.reveal .stretch {
+  max-width: none;
+  max-height: none; }
+
+.reveal pre.stretch code {
+  height: 100%;
+  max-height: 100%;
+  box-sizing: border-box; }
+
+/*********************************************
+ * CONTROLS
+ *********************************************/
+@-webkit-keyframes bounce-right {
+  0%, 10%, 25%, 40%, 50% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  20% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px); }
+  30% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px); } }
+@keyframes bounce-right {
+  0%, 10%, 25%, 40%, 50% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  20% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px); }
+  30% {
+    -webkit-transform: translateX(-5px);
+            transform: translateX(-5px); } }
+
+@-webkit-keyframes bounce-down {
+  0%, 10%, 25%, 40%, 50% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+  20% {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px); }
+  30% {
+    -webkit-transform: translateY(-5px);
+            transform: translateY(-5px); } }
+
+@keyframes bounce-down {
+  0%, 10%, 25%, 40%, 50% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+  20% {
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px); }
+  30% {
+    -webkit-transform: translateY(-5px);
+            transform: translateY(-5px); } }
+
+.reveal .controls {
+  display: none;
+  position: absolute;
+  top: auto;
+  bottom: 12px;
+  right: 12px;
+  left: auto;
+  z-index: 1;
+  color: #000;
+  pointer-events: none;
+  font-size: 10px; }
+  .reveal .controls button {
+    position: absolute;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    color: currentColor;
+    -webkit-transform: scale(0.9999);
+            transform: scale(0.9999);
+    transition: color 0.2s ease, opacity 0.2s ease, -webkit-transform 0.2s ease;
+    transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+    z-index: 2;
+    pointer-events: auto;
+    font-size: inherit;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent; }
+  .reveal .controls .controls-arrow:before,
+  .reveal .controls .controls-arrow:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2.6em;
+    height: 0.5em;
+    border-radius: 0.25em;
+    background-color: currentColor;
+    transition: all 0.15s ease, background-color 0.8s ease;
+    -webkit-transform-origin: 0.2em 50%;
+            transform-origin: 0.2em 50%;
+    will-change: transform; }
+  .reveal .controls .controls-arrow {
+    position: relative;
+    width: 3.6em;
+    height: 3.6em; }
+    .reveal .controls .controls-arrow:before {
+      -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(45deg);
+              transform: translateX(0.5em) translateY(1.55em) rotate(45deg); }
+    .reveal .controls .controls-arrow:after {
+      -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(-45deg);
+              transform: translateX(0.5em) translateY(1.55em) rotate(-45deg); }
+    .reveal .controls .controls-arrow:hover:before {
+      -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(40deg);
+              transform: translateX(0.5em) translateY(1.55em) rotate(40deg); }
+    .reveal .controls .controls-arrow:hover:after {
+      -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(-40deg);
+              transform: translateX(0.5em) translateY(1.55em) rotate(-40deg); }
+    .reveal .controls .controls-arrow:active:before {
+      -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(36deg);
+              transform: translateX(0.5em) translateY(1.55em) rotate(36deg); }
+    .reveal .controls .controls-arrow:active:after {
+      -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(-36deg);
+              transform: translateX(0.5em) translateY(1.55em) rotate(-36deg); }
+  .reveal .controls .navigate-left {
+    right: 6.4em;
+    bottom: 3.2em;
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px); }
+  .reveal .controls .navigate-right {
+    right: 0;
+    bottom: 3.2em;
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px); }
+    .reveal .controls .navigate-right .controls-arrow {
+      -webkit-transform: rotate(180deg);
+              transform: rotate(180deg); }
+    .reveal .controls .navigate-right.highlight {
+      -webkit-animation: bounce-right 2s 50 both ease-out;
+              animation: bounce-right 2s 50 both ease-out; }
+  .reveal .controls .navigate-up {
+    right: 3.2em;
+    bottom: 6.4em;
+    -webkit-transform: translateY(-10px);
+            transform: translateY(-10px); }
+    .reveal .controls .navigate-up .controls-arrow {
+      -webkit-transform: rotate(90deg);
+              transform: rotate(90deg); }
+  .reveal .controls .navigate-down {
+    right: 3.2em;
+    bottom: 0;
+    -webkit-transform: translateY(10px);
+            transform: translateY(10px); }
+    .reveal .controls .navigate-down .controls-arrow {
+      -webkit-transform: rotate(-90deg);
+              transform: rotate(-90deg); }
+    .reveal .controls .navigate-down.highlight {
+      -webkit-animation: bounce-down 2s 50 both ease-out;
+              animation: bounce-down 2s 50 both ease-out; }
+  .reveal .controls[data-controls-back-arrows="faded"] .navigate-left.enabled,
+  .reveal .controls[data-controls-back-arrows="faded"] .navigate-up.enabled {
+    opacity: 0.3; }
+    .reveal .controls[data-controls-back-arrows="faded"] .navigate-left.enabled:hover,
+    .reveal .controls[data-controls-back-arrows="faded"] .navigate-up.enabled:hover {
+      opacity: 1; }
+  .reveal .controls[data-controls-back-arrows="hidden"] .navigate-left.enabled,
+  .reveal .controls[data-controls-back-arrows="hidden"] .navigate-up.enabled {
+    opacity: 0;
+    visibility: hidden; }
+  .reveal .controls .enabled {
+    visibility: visible;
+    opacity: 0.9;
+    cursor: pointer;
+    -webkit-transform: none;
+            transform: none; }
+  .reveal .controls .enabled.fragmented {
+    opacity: 0.5; }
+  .reveal .controls .enabled:hover,
+  .reveal .controls .enabled.fragmented:hover {
+    opacity: 1; }
+
+.reveal:not(.has-vertical-slides) .controls .navigate-left {
+  bottom: 1.4em;
+  right: 5.5em; }
+
+.reveal:not(.has-vertical-slides) .controls .navigate-right {
+  bottom: 1.4em;
+  right: 0.5em; }
+
+.reveal:not(.has-horizontal-slides) .controls .navigate-up {
+  right: 1.4em;
+  bottom: 5em; }
+
+.reveal:not(.has-horizontal-slides) .controls .navigate-down {
+  right: 1.4em;
+  bottom: 0.5em; }
+
+.reveal.has-dark-background .controls {
+  color: #fff; }
+
+.reveal.has-light-background .controls {
+  color: #000; }
+
+.reveal.no-hover .controls .controls-arrow:hover:before,
+.reveal.no-hover .controls .controls-arrow:active:before {
+  -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(45deg);
+          transform: translateX(0.5em) translateY(1.55em) rotate(45deg); }
+
+.reveal.no-hover .controls .controls-arrow:hover:after,
+.reveal.no-hover .controls .controls-arrow:active:after {
+  -webkit-transform: translateX(0.5em) translateY(1.55em) rotate(-45deg);
+          transform: translateX(0.5em) translateY(1.55em) rotate(-45deg); }
+
+@media screen and (min-width: 500px) {
+  .reveal .controls[data-controls-layout="edges"] {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; }
+  .reveal .controls[data-controls-layout="edges"] .navigate-left,
+  .reveal .controls[data-controls-layout="edges"] .navigate-right,
+  .reveal .controls[data-controls-layout="edges"] .navigate-up,
+  .reveal .controls[data-controls-layout="edges"] .navigate-down {
+    bottom: auto;
+    right: auto; }
+  .reveal .controls[data-controls-layout="edges"] .navigate-left {
+    top: 50%;
+    left: 8px;
+    margin-top: -1.8em; }
+  .reveal .controls[data-controls-layout="edges"] .navigate-right {
+    top: 50%;
+    right: 8px;
+    margin-top: -1.8em; }
+  .reveal .controls[data-controls-layout="edges"] .navigate-up {
+    top: 8px;
+    left: 50%;
+    margin-left: -1.8em; }
+  .reveal .controls[data-controls-layout="edges"] .navigate-down {
+    bottom: 8px;
+    left: 50%;
+    margin-left: -1.8em; } }
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  position: absolute;
+  display: none;
+  height: 3px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff; }
+
+.reveal .progress:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 10px;
+  width: 100%;
+  top: -10px; }
+
+.reveal .progress span {
+  display: block;
+  height: 100%;
+  width: 0px;
+  background-color: currentColor;
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+/*********************************************
+ * SLIDE NUMBER
+ *********************************************/
+.reveal .slide-number {
+  position: absolute;
+  display: block;
+  right: 8px;
+  bottom: 8px;
+  z-index: 31;
+  font-family: Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 5px; }
+
+.reveal .slide-number a {
+  color: currentColor; }
+
+.reveal .slide-number-delimiter {
+  margin: 0 3px; }
+
+/*********************************************
+ * SLIDES
+ *********************************************/
+.reveal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  -ms-touch-action: none;
+      touch-action: none; }
+
+@media only screen and (orientation: landscape) {
+  .reveal.ua-iphone {
+    position: fixed; } }
+
+.reveal .slides {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+  text-align: center;
+  -webkit-perspective: 600px;
+          perspective: 600px;
+  -webkit-perspective-origin: 50% 40%;
+          perspective-origin: 50% 40%; }
+
+.reveal .slides > section {
+  -ms-perspective: 600px; }
+
+.reveal .slides > section,
+.reveal .slides > section > section {
+  display: none;
+  position: absolute;
+  width: 100%;
+  padding: 20px 0px;
+  pointer-events: auto;
+  z-index: 10;
+  -webkit-transform-style: flat;
+          transform-style: flat;
+  transition: -webkit-transform-origin 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), -webkit-transform 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), visibility 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), opacity 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: transform-origin 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), transform 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), visibility 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985), opacity 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+/* Global transition speed settings */
+.reveal[data-transition-speed="fast"] .slides section {
+  transition-duration: 400ms; }
+
+.reveal[data-transition-speed="slow"] .slides section {
+  transition-duration: 1200ms; }
+
+/* Slide-specific transition speed overrides */
+.reveal .slides section[data-transition-speed="fast"] {
+  transition-duration: 400ms; }
+
+.reveal .slides section[data-transition-speed="slow"] {
+  transition-duration: 1200ms; }
+
+.reveal .slides > section.stack {
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none; }
+
+.reveal .slides > section.present,
+.reveal .slides > section > section.present {
+  display: block;
+  z-index: 11;
+  opacity: 1; }
+
+.reveal .slides > section:empty,
+.reveal .slides > section > section:empty,
+.reveal .slides > section[data-background-interactive],
+.reveal .slides > section > section[data-background-interactive] {
+  pointer-events: none; }
+
+.reveal.center,
+.reveal.center .slides,
+.reveal.center .slides section {
+  min-height: 0 !important; }
+
+/* Don't allow interaction with invisible slides */
+.reveal .slides > section.future,
+.reveal .slides > section > section.future,
+.reveal .slides > section.past,
+.reveal .slides > section > section.past {
+  pointer-events: none; }
+
+.reveal.overview .slides > section,
+.reveal.overview .slides > section > section {
+  pointer-events: auto; }
+
+.reveal .slides > section.past,
+.reveal .slides > section.future,
+.reveal .slides > section > section.past,
+.reveal .slides > section > section.future {
+  opacity: 0; }
+
+/*********************************************
+ * Mixins for readability of transitions
+ *********************************************/
+/*********************************************
+ * SLIDE TRANSITION
+ * Aliased 'linear' for backwards compatibility
+ *********************************************/
+.reveal.slide section {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.reveal .slides > section[data-transition=slide].past,
+.reveal .slides > section[data-transition~=slide-out].past,
+.reveal.slide .slides > section:not([data-transition]).past {
+  -webkit-transform: translate(-150%, 0);
+          transform: translate(-150%, 0); }
+
+.reveal .slides > section[data-transition=slide].future,
+.reveal .slides > section[data-transition~=slide-in].future,
+.reveal.slide .slides > section:not([data-transition]).future {
+  -webkit-transform: translate(150%, 0);
+          transform: translate(150%, 0); }
+
+.reveal .slides > section > section[data-transition=slide].past,
+.reveal .slides > section > section[data-transition~=slide-out].past,
+.reveal.slide .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate(0, -150%);
+          transform: translate(0, -150%); }
+
+.reveal .slides > section > section[data-transition=slide].future,
+.reveal .slides > section > section[data-transition~=slide-in].future,
+.reveal.slide .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate(0, 150%);
+          transform: translate(0, 150%); }
+
+.reveal.linear section {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.reveal .slides > section[data-transition=linear].past,
+.reveal .slides > section[data-transition~=linear-out].past,
+.reveal.linear .slides > section:not([data-transition]).past {
+  -webkit-transform: translate(-150%, 0);
+          transform: translate(-150%, 0); }
+
+.reveal .slides > section[data-transition=linear].future,
+.reveal .slides > section[data-transition~=linear-in].future,
+.reveal.linear .slides > section:not([data-transition]).future {
+  -webkit-transform: translate(150%, 0);
+          transform: translate(150%, 0); }
+
+.reveal .slides > section > section[data-transition=linear].past,
+.reveal .slides > section > section[data-transition~=linear-out].past,
+.reveal.linear .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate(0, -150%);
+          transform: translate(0, -150%); }
+
+.reveal .slides > section > section[data-transition=linear].future,
+.reveal .slides > section > section[data-transition~=linear-in].future,
+.reveal.linear .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate(0, 150%);
+          transform: translate(0, 150%); }
+
+/*********************************************
+ * CONVEX TRANSITION
+ * Aliased 'default' for backwards compatibility
+ *********************************************/
+.reveal .slides section[data-transition=default].stack,
+.reveal.default .slides section.stack {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal .slides > section[data-transition=default].past,
+.reveal .slides > section[data-transition~=default-out].past,
+.reveal.default .slides > section:not([data-transition]).past {
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0); }
+
+.reveal .slides > section[data-transition=default].future,
+.reveal .slides > section[data-transition~=default-in].future,
+.reveal.default .slides > section:not([data-transition]).future {
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0); }
+
+.reveal .slides > section > section[data-transition=default].past,
+.reveal .slides > section > section[data-transition~=default-out].past,
+.reveal.default .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0);
+          transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0); }
+
+.reveal .slides > section > section[data-transition=default].future,
+.reveal .slides > section > section[data-transition~=default-in].future,
+.reveal.default .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0);
+          transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0); }
+
+.reveal .slides section[data-transition=convex].stack,
+.reveal.convex .slides section.stack {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal .slides > section[data-transition=convex].past,
+.reveal .slides > section[data-transition~=convex-out].past,
+.reveal.convex .slides > section:not([data-transition]).past {
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0); }
+
+.reveal .slides > section[data-transition=convex].future,
+.reveal .slides > section[data-transition~=convex-in].future,
+.reveal.convex .slides > section:not([data-transition]).future {
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0); }
+
+.reveal .slides > section > section[data-transition=convex].past,
+.reveal .slides > section > section[data-transition~=convex-out].past,
+.reveal.convex .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0);
+          transform: translate3d(0, -300px, 0) rotateX(70deg) translate3d(0, -300px, 0); }
+
+.reveal .slides > section > section[data-transition=convex].future,
+.reveal .slides > section > section[data-transition~=convex-in].future,
+.reveal.convex .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0);
+          transform: translate3d(0, 300px, 0) rotateX(-70deg) translate3d(0, 300px, 0); }
+
+/*********************************************
+ * CONCAVE TRANSITION
+ *********************************************/
+.reveal .slides section[data-transition=concave].stack,
+.reveal.concave .slides section.stack {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal .slides > section[data-transition=concave].past,
+.reveal .slides > section[data-transition~=concave-out].past,
+.reveal.concave .slides > section:not([data-transition]).past {
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0); }
+
+.reveal .slides > section[data-transition=concave].future,
+.reveal .slides > section[data-transition~=concave-in].future,
+.reveal.concave .slides > section:not([data-transition]).future {
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0); }
+
+.reveal .slides > section > section[data-transition=concave].past,
+.reveal .slides > section > section[data-transition~=concave-out].past,
+.reveal.concave .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate3d(0, -80%, 0) rotateX(-70deg) translate3d(0, -80%, 0);
+          transform: translate3d(0, -80%, 0) rotateX(-70deg) translate3d(0, -80%, 0); }
+
+.reveal .slides > section > section[data-transition=concave].future,
+.reveal .slides > section > section[data-transition~=concave-in].future,
+.reveal.concave .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate3d(0, 80%, 0) rotateX(70deg) translate3d(0, 80%, 0);
+          transform: translate3d(0, 80%, 0) rotateX(70deg) translate3d(0, 80%, 0); }
+
+/*********************************************
+ * ZOOM TRANSITION
+ *********************************************/
+.reveal .slides section[data-transition=zoom],
+.reveal.zoom .slides section:not([data-transition]) {
+  transition-timing-function: ease; }
+
+.reveal .slides > section[data-transition=zoom].past,
+.reveal .slides > section[data-transition~=zoom-out].past,
+.reveal.zoom .slides > section:not([data-transition]).past {
+  visibility: hidden;
+  -webkit-transform: scale(16);
+          transform: scale(16); }
+
+.reveal .slides > section[data-transition=zoom].future,
+.reveal .slides > section[data-transition~=zoom-in].future,
+.reveal.zoom .slides > section:not([data-transition]).future {
+  visibility: hidden;
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
+
+.reveal .slides > section > section[data-transition=zoom].past,
+.reveal .slides > section > section[data-transition~=zoom-out].past,
+.reveal.zoom .slides > section > section:not([data-transition]).past {
+  -webkit-transform: translate(0, -150%);
+          transform: translate(0, -150%); }
+
+.reveal .slides > section > section[data-transition=zoom].future,
+.reveal .slides > section > section[data-transition~=zoom-in].future,
+.reveal.zoom .slides > section > section:not([data-transition]).future {
+  -webkit-transform: translate(0, 150%);
+          transform: translate(0, 150%); }
+
+/*********************************************
+ * CUBE TRANSITION
+ *
+ * WARNING:
+ * this is deprecated and will be removed in a
+ * future version.
+ *********************************************/
+.reveal.cube .slides {
+  -webkit-perspective: 1300px;
+          perspective: 1300px; }
+
+.reveal.cube .slides section {
+  padding: 30px;
+  min-height: 700px;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  box-sizing: border-box;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal.center.cube .slides section {
+  min-height: 0; }
+
+.reveal.cube .slides section:not(.stack):before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  -webkit-transform: translateZ(-20px);
+          transform: translateZ(-20px); }
+
+.reveal.cube .slides section:not(.stack):after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 90%;
+  height: 30px;
+  left: 5%;
+  bottom: 0;
+  background: none;
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0px 95px 25px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateZ(-90px) rotateX(65deg);
+          transform: translateZ(-90px) rotateX(65deg); }
+
+.reveal.cube .slides > section.stack {
+  padding: 0;
+  background: none; }
+
+.reveal.cube .slides > section.past {
+  -webkit-transform-origin: 100% 0%;
+          transform-origin: 100% 0%;
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+          transform: translate3d(-100%, 0, 0) rotateY(-90deg); }
+
+.reveal.cube .slides > section.future {
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg);
+          transform: translate3d(100%, 0, 0) rotateY(90deg); }
+
+.reveal.cube .slides > section > section.past {
+  -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+  -webkit-transform: translate3d(0, -100%, 0) rotateX(90deg);
+          transform: translate3d(0, -100%, 0) rotateX(90deg); }
+
+.reveal.cube .slides > section > section.future {
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  -webkit-transform: translate3d(0, 100%, 0) rotateX(-90deg);
+          transform: translate3d(0, 100%, 0) rotateX(-90deg); }
+
+/*********************************************
+ * PAGE TRANSITION
+ *
+ * WARNING:
+ * this is deprecated and will be removed in a
+ * future version.
+ *********************************************/
+.reveal.page .slides {
+  -webkit-perspective-origin: 0% 50%;
+          perspective-origin: 0% 50%;
+  -webkit-perspective: 3000px;
+          perspective: 3000px; }
+
+.reveal.page .slides section {
+  padding: 30px;
+  min-height: 700px;
+  box-sizing: border-box;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d; }
+
+.reveal.page .slides section.past {
+  z-index: 12; }
+
+.reveal.page .slides section:not(.stack):before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-transform: translateZ(-20px);
+          transform: translateZ(-20px); }
+
+.reveal.page .slides section:not(.stack):after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 90%;
+  height: 30px;
+  left: 5%;
+  bottom: 0;
+  background: none;
+  z-index: 1;
+  border-radius: 4px;
+  box-shadow: 0px 95px 25px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateZ(-90px) rotateX(65deg); }
+
+.reveal.page .slides > section.stack {
+  padding: 0;
+  background: none; }
+
+.reveal.page .slides > section.past {
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  -webkit-transform: translate3d(-40%, 0, 0) rotateY(-80deg);
+          transform: translate3d(-40%, 0, 0) rotateY(-80deg); }
+
+.reveal.page .slides > section.future {
+  -webkit-transform-origin: 100% 0%;
+          transform-origin: 100% 0%;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
+
+.reveal.page .slides > section > section.past {
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+  -webkit-transform: translate3d(0, -40%, 0) rotateX(80deg);
+          transform: translate3d(0, -40%, 0) rotateX(80deg); }
+
+.reveal.page .slides > section > section.future {
+  -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0); }
+
+/*********************************************
+ * FADE TRANSITION
+ *********************************************/
+.reveal .slides section[data-transition=fade],
+.reveal.fade .slides section:not([data-transition]),
+.reveal.fade .slides > section > section:not([data-transition]) {
+  -webkit-transform: none;
+          transform: none;
+  transition: opacity 0.5s; }
+
+.reveal.fade.overview .slides section,
+.reveal.fade.overview .slides > section > section {
+  transition: none; }
+
+/*********************************************
+ * NO TRANSITION
+ *********************************************/
+.reveal .slides section[data-transition=none],
+.reveal.none .slides section:not([data-transition]) {
+  -webkit-transform: none;
+          transform: none;
+  transition: none; }
+
+/*********************************************
+ * PAUSED MODE
+ *********************************************/
+.reveal .pause-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 100;
+  transition: all 1s ease; }
+
+.reveal .pause-overlay .resume-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: #ccc;
+  border-radius: 2px;
+  padding: 6px 14px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  background: transparent;
+  cursor: pointer; }
+  .reveal .pause-overlay .resume-button:hover {
+    color: #fff;
+    border-color: #fff; }
+
+.reveal.paused .pause-overlay {
+  visibility: visible;
+  opacity: 1; }
+
+/*********************************************
+ * FALLBACK
+ *********************************************/
+.no-transforms {
+  overflow-y: auto; }
+
+.no-transforms .reveal .slides {
+  position: relative;
+  width: 80%;
+  height: auto !important;
+  top: 0;
+  left: 50%;
+  margin: 0;
+  text-align: center; }
+
+.no-transforms .reveal .controls,
+.no-transforms .reveal .progress {
+  display: none !important; }
+
+.no-transforms .reveal .slides section {
+  display: block !important;
+  opacity: 1 !important;
+  position: relative !important;
+  height: auto;
+  min-height: 0;
+  top: 0;
+  left: -50%;
+  margin: 70px 0;
+  -webkit-transform: none;
+          transform: none; }
+
+.no-transforms .reveal .slides section section {
+  left: 0; }
+
+.reveal .no-transition,
+.reveal .no-transition * {
+  transition: none !important; }
+
+/*********************************************
+ * PER-SLIDE BACKGROUNDS
+ *********************************************/
+.reveal .backgrounds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -webkit-perspective: 600px;
+          perspective: 600px; }
+
+.reveal .slide-background {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  background-color: transparent;
+  transition: all 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+.reveal .slide-background-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover; }
+
+.reveal .slide-background.stack {
+  display: block; }
+
+.reveal .slide-background.present {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2; }
+
+.print-pdf .reveal .slide-background {
+  opacity: 1 !important;
+  visibility: visible !important; }
+
+/* Video backgrounds */
+.reveal .slide-background video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  top: 0;
+  left: 0;
+  -o-object-fit: cover;
+     object-fit: cover; }
+
+.reveal .slide-background[data-background-size="contain"] video {
+  -o-object-fit: contain;
+     object-fit: contain; }
+
+/* Immediate transition style */
+.reveal[data-background-transition=none] > .backgrounds .slide-background,
+.reveal > .backgrounds .slide-background[data-background-transition=none] {
+  transition: none; }
+
+/* Slide */
+.reveal[data-background-transition=slide] > .backgrounds .slide-background,
+.reveal > .backgrounds .slide-background[data-background-transition=slide] {
+  opacity: 1;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.reveal[data-background-transition=slide] > .backgrounds .slide-background.past,
+.reveal > .backgrounds .slide-background.past[data-background-transition=slide] {
+  -webkit-transform: translate(-100%, 0);
+          transform: translate(-100%, 0); }
+
+.reveal[data-background-transition=slide] > .backgrounds .slide-background.future,
+.reveal > .backgrounds .slide-background.future[data-background-transition=slide] {
+  -webkit-transform: translate(100%, 0);
+          transform: translate(100%, 0); }
+
+.reveal[data-background-transition=slide] > .backgrounds .slide-background > .slide-background.past,
+.reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=slide] {
+  -webkit-transform: translate(0, -100%);
+          transform: translate(0, -100%); }
+
+.reveal[data-background-transition=slide] > .backgrounds .slide-background > .slide-background.future,
+.reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=slide] {
+  -webkit-transform: translate(0, 100%);
+          transform: translate(0, 100%); }
+
+/* Convex */
+.reveal[data-background-transition=convex] > .backgrounds .slide-background.past,
+.reveal > .backgrounds .slide-background.past[data-background-transition=convex] {
+  opacity: 0;
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(-90deg) translate3d(-100%, 0, 0); }
+
+.reveal[data-background-transition=convex] > .backgrounds .slide-background.future,
+.reveal > .backgrounds .slide-background.future[data-background-transition=convex] {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(90deg) translate3d(100%, 0, 0); }
+
+.reveal[data-background-transition=convex] > .backgrounds .slide-background > .slide-background.past,
+.reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=convex] {
+  opacity: 0;
+  -webkit-transform: translate3d(0, -100%, 0) rotateX(90deg) translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0) rotateX(90deg) translate3d(0, -100%, 0); }
+
+.reveal[data-background-transition=convex] > .backgrounds .slide-background > .slide-background.future,
+.reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=convex] {
+  opacity: 0;
+  -webkit-transform: translate3d(0, 100%, 0) rotateX(-90deg) translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0) rotateX(-90deg) translate3d(0, 100%, 0); }
+
+/* Concave */
+.reveal[data-background-transition=concave] > .backgrounds .slide-background.past,
+.reveal > .backgrounds .slide-background.past[data-background-transition=concave] {
+  opacity: 0;
+  -webkit-transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0) rotateY(90deg) translate3d(-100%, 0, 0); }
+
+.reveal[data-background-transition=concave] > .backgrounds .slide-background.future,
+.reveal > .backgrounds .slide-background.future[data-background-transition=concave] {
+  opacity: 0;
+  -webkit-transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0) rotateY(-90deg) translate3d(100%, 0, 0); }
+
+.reveal[data-background-transition=concave] > .backgrounds .slide-background > .slide-background.past,
+.reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=concave] {
+  opacity: 0;
+  -webkit-transform: translate3d(0, -100%, 0) rotateX(-90deg) translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0) rotateX(-90deg) translate3d(0, -100%, 0); }
+
+.reveal[data-background-transition=concave] > .backgrounds .slide-background > .slide-background.future,
+.reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=concave] {
+  opacity: 0;
+  -webkit-transform: translate3d(0, 100%, 0) rotateX(90deg) translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0) rotateX(90deg) translate3d(0, 100%, 0); }
+
+/* Zoom */
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background,
+.reveal > .backgrounds .slide-background[data-background-transition=zoom] {
+  transition-timing-function: ease; }
+
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background.past,
+.reveal > .backgrounds .slide-background.past[data-background-transition=zoom] {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(16);
+          transform: scale(16); }
+
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background.future,
+.reveal > .backgrounds .slide-background.future[data-background-transition=zoom] {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
+
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background > .slide-background.past,
+.reveal > .backgrounds .slide-background > .slide-background.past[data-background-transition=zoom] {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(16);
+          transform: scale(16); }
+
+.reveal[data-background-transition=zoom] > .backgrounds .slide-background > .slide-background.future,
+.reveal > .backgrounds .slide-background > .slide-background.future[data-background-transition=zoom] {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
+
+/* Global transition speed settings */
+.reveal[data-transition-speed="fast"] > .backgrounds .slide-background {
+  transition-duration: 400ms; }
+
+.reveal[data-transition-speed="slow"] > .backgrounds .slide-background {
+  transition-duration: 1200ms; }
+
+/*********************************************
+ * OVERVIEW
+ *********************************************/
+.reveal.overview {
+  -webkit-perspective-origin: 50% 50%;
+          perspective-origin: 50% 50%;
+  -webkit-perspective: 700px;
+          perspective: 700px; }
+  .reveal.overview .slides {
+    -moz-transform-style: preserve-3d; }
+  .reveal.overview .slides section {
+    height: 100%;
+    top: 0 !important;
+    opacity: 1 !important;
+    overflow: hidden;
+    visibility: visible !important;
+    cursor: pointer;
+    box-sizing: border-box; }
+  .reveal.overview .slides section:hover,
+  .reveal.overview .slides section.present {
+    outline: 10px solid rgba(150, 150, 150, 0.4);
+    outline-offset: 10px; }
+  .reveal.overview .slides section .fragment {
+    opacity: 1;
+    transition: none; }
+  .reveal.overview .slides section:after,
+  .reveal.overview .slides section:before {
+    display: none !important; }
+  .reveal.overview .slides > section.stack {
+    padding: 0;
+    top: 0 !important;
+    background: none;
+    outline: none;
+    overflow: visible; }
+  .reveal.overview .backgrounds {
+    -webkit-perspective: inherit;
+            perspective: inherit;
+    -moz-transform-style: preserve-3d; }
+  .reveal.overview .backgrounds .slide-background {
+    opacity: 1;
+    visibility: visible;
+    outline: 10px solid rgba(150, 150, 150, 0.1);
+    outline-offset: 10px; }
+  .reveal.overview .backgrounds .slide-background.stack {
+    overflow: visible; }
+
+.reveal.overview .slides section,
+.reveal.overview-deactivating .slides section {
+  transition: none; }
+
+.reveal.overview .backgrounds .slide-background,
+.reveal.overview-deactivating .backgrounds .slide-background {
+  transition: none; }
+
+/*********************************************
+ * RTL SUPPORT
+ *********************************************/
+.reveal.rtl .slides,
+.reveal.rtl .slides h1,
+.reveal.rtl .slides h2,
+.reveal.rtl .slides h3,
+.reveal.rtl .slides h4,
+.reveal.rtl .slides h5,
+.reveal.rtl .slides h6 {
+  direction: rtl;
+  font-family: sans-serif; }
+
+.reveal.rtl pre,
+.reveal.rtl code {
+  direction: ltr; }
+
+.reveal.rtl ol,
+.reveal.rtl ul {
+  text-align: right; }
+
+.reveal.rtl .progress span {
+  float: right; }
+
+/*********************************************
+ * PARALLAX BACKGROUND
+ *********************************************/
+.reveal.has-parallax-background .backgrounds {
+  transition: all 0.8s ease; }
+
+/* Global transition speed settings */
+.reveal.has-parallax-background[data-transition-speed="fast"] .backgrounds {
+  transition-duration: 400ms; }
+
+.reveal.has-parallax-background[data-transition-speed="slow"] .backgrounds {
+  transition-duration: 1200ms; }
+
+/*********************************************
+ * LINK PREVIEW OVERLAY
+ *********************************************/
+.reveal .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease; }
+
+.reveal .overlay.visible {
+  opacity: 1;
+  visibility: visible; }
+
+.reveal .overlay .spinner {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  z-index: 10;
+  background-image: url(data:image/gif;base64,R0lGODlhIAAgAPMAAJmZmf%2F%2F%2F6%2Bvr8nJybW1tcDAwOjo6Nvb26ioqKOjo7Ozs%2FLy8vz8%2FAAAAAAAAAAAACH%2FC05FVFNDQVBFMi4wAwEAAAAh%2FhpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh%2BQQJCgAAACwAAAAAIAAgAAAE5xDISWlhperN52JLhSSdRgwVo1ICQZRUsiwHpTJT4iowNS8vyW2icCF6k8HMMBkCEDskxTBDAZwuAkkqIfxIQyhBQBFvAQSDITM5VDW6XNE4KagNh6Bgwe60smQUB3d4Rz1ZBApnFASDd0hihh12BkE9kjAJVlycXIg7CQIFA6SlnJ87paqbSKiKoqusnbMdmDC2tXQlkUhziYtyWTxIfy6BE8WJt5YJvpJivxNaGmLHT0VnOgSYf0dZXS7APdpB309RnHOG5gDqXGLDaC457D1zZ%2FV%2FnmOM82XiHRLYKhKP1oZmADdEAAAh%2BQQJCgAAACwAAAAAIAAgAAAE6hDISWlZpOrNp1lGNRSdRpDUolIGw5RUYhhHukqFu8DsrEyqnWThGvAmhVlteBvojpTDDBUEIFwMFBRAmBkSgOrBFZogCASwBDEY%2FCZSg7GSE0gSCjQBMVG023xWBhklAnoEdhQEfyNqMIcKjhRsjEdnezB%2BA4k8gTwJhFuiW4dokXiloUepBAp5qaKpp6%2BHo7aWW54wl7obvEe0kRuoplCGepwSx2jJvqHEmGt6whJpGpfJCHmOoNHKaHx61WiSR92E4lbFoq%2BB6QDtuetcaBPnW6%2BO7wDHpIiK9SaVK5GgV543tzjgGcghAgAh%2BQQJCgAAACwAAAAAIAAgAAAE7hDISSkxpOrN5zFHNWRdhSiVoVLHspRUMoyUakyEe8PTPCATW9A14E0UvuAKMNAZKYUZCiBMuBakSQKG8G2FzUWox2AUtAQFcBKlVQoLgQReZhQlCIJesQXI5B0CBnUMOxMCenoCfTCEWBsJColTMANldx15BGs8B5wlCZ9Po6OJkwmRpnqkqnuSrayqfKmqpLajoiW5HJq7FL1Gr2mMMcKUMIiJgIemy7xZtJsTmsM4xHiKv5KMCXqfyUCJEonXPN2rAOIAmsfB3uPoAK%2B%2BG%2Bw48edZPK%2BM6hLJpQg484enXIdQFSS1u6UhksENEQAAIfkECQoAAAAsAAAAACAAIAAABOcQyEmpGKLqzWcZRVUQnZYg1aBSh2GUVEIQ2aQOE%2BG%2BcD4ntpWkZQj1JIiZIogDFFyHI0UxQwFugMSOFIPJftfVAEoZLBbcLEFhlQiqGp1Vd140AUklUN3eCA51C1EWMzMCezCBBmkxVIVHBWd3HHl9JQOIJSdSnJ0TDKChCwUJjoWMPaGqDKannasMo6WnM562R5YluZRwur0wpgqZE7NKUm%2BFNRPIhjBJxKZteWuIBMN4zRMIVIhffcgojwCF117i4nlLnY5ztRLsnOk%2BaV%2BoJY7V7m76PdkS4trKcdg0Zc0tTcKkRAAAIfkECQoAAAAsAAAAACAAIAAABO4QyEkpKqjqzScpRaVkXZWQEximw1BSCUEIlDohrft6cpKCk5xid5MNJTaAIkekKGQkWyKHkvhKsR7ARmitkAYDYRIbUQRQjWBwJRzChi9CRlBcY1UN4g0%2FVNB0AlcvcAYHRyZPdEQFYV8ccwR5HWxEJ02YmRMLnJ1xCYp0Y5idpQuhopmmC2KgojKasUQDk5BNAwwMOh2RtRq5uQuPZKGIJQIGwAwGf6I0JXMpC8C7kXWDBINFMxS4DKMAWVWAGYsAdNqW5uaRxkSKJOZKaU3tPOBZ4DuK2LATgJhkPJMgTwKCdFjyPHEnKxFCDhEAACH5BAkKAAAALAAAAAAgACAAAATzEMhJaVKp6s2nIkolIJ2WkBShpkVRWqqQrhLSEu9MZJKK9y1ZrqYK9WiClmvoUaF8gIQSNeF1Er4MNFn4SRSDARWroAIETg1iVwuHjYB1kYc1mwruwXKC9gmsJXliGxc%2BXiUCby9ydh1sOSdMkpMTBpaXBzsfhoc5l58Gm5yToAaZhaOUqjkDgCWNHAULCwOLaTmzswadEqggQwgHuQsHIoZCHQMMQgQGubVEcxOPFAcMDAYUA85eWARmfSRQCdcMe0zeP1AAygwLlJtPNAAL19DARdPzBOWSm1brJBi45soRAWQAAkrQIykShQ9wVhHCwCQCACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiRMDjI0Fd30%2FiI2UA5GSS5UDj2l6NoqgOgN4gksEBgYFf0FDqKgHnyZ9OX8HrgYHdHpcHQULXAS2qKpENRg7eAMLC7kTBaixUYFkKAzWAAnLC7FLVxLWDBLKCwaKTULgEwbLA4hJtOkSBNqITT3xEgfLpBtzE%2FjiuL04RGEBgwWhShRgQExHBAAh%2BQQJCgAAACwAAAAAIAAgAAAE7xDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfZiCqGk5dTESJeaOAlClzsJsqwiJwiqnFrb2nS9kmIcgEsjQydLiIlHehhpejaIjzh9eomSjZR%2BipslWIRLAgMDOR2DOqKogTB9pCUJBagDBXR6XB0EBkIIsaRsGGMMAxoDBgYHTKJiUYEGDAzHC9EACcUGkIgFzgwZ0QsSBcXHiQvOwgDdEwfFs0sDzt4S6BK4xYjkDOzn0unFeBzOBijIm1Dgmg5YFQwsCMjp1oJ8LyIAACH5BAkKAAAALAAAAAAgACAAAATwEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GGl6NoiPOH16iZKNlH6KmyWFOggHhEEvAwwMA0N9GBsEC6amhnVcEwavDAazGwIDaH1ipaYLBUTCGgQDA8NdHz0FpqgTBwsLqAbWAAnIA4FWKdMLGdYGEgraigbT0OITBcg5QwPT4xLrROZL6AuQAPUS7bxLpoWidY0JtxLHKhwwMJBTHgPKdEQAACH5BAkKAAAALAAAAAAgACAAAATrEMhJaVKp6s2nIkqFZF2VIBWhUsJaTokqUCoBq%2BE71SRQeyqUToLA7VxF0JDyIQh%2FMVVPMt1ECZlfcjZJ9mIKoaTl1MRIl5o4CUKXOwmyrCInCKqcWtvadL2SYhyASyNDJ0uIiUd6GAULDJCRiXo1CpGXDJOUjY%2BYip9DhToJA4RBLwMLCwVDfRgbBAaqqoZ1XBMHswsHtxtFaH1iqaoGNgAIxRpbFAgfPQSqpbgGBqUD1wBXeCYp1AYZ19JJOYgH1KwA4UBvQwXUBxPqVD9L3sbp2BNk2xvvFPJd%2BMFCN6HAAIKgNggY0KtEBAAh%2BQQJCgAAACwAAAAAIAAgAAAE6BDISWlSqerNpyJKhWRdlSAVoVLCWk6JKlAqAavhO9UkUHsqlE6CwO1cRdCQ8iEIfzFVTzLdRAmZX3I2SfYIDMaAFdTESJeaEDAIMxYFqrOUaNW4E4ObYcCXaiBVEgULe0NJaxxtYksjh2NLkZISgDgJhHthkpU4mW6blRiYmZOlh4JWkDqILwUGBnE6TYEbCgevr0N1gH4At7gHiRpFaLNrrq8HNgAJA70AWxQIH1%2BvsYMDAzZQPC9VCNkDWUhGkuE5PxJNwiUK4UfLzOlD4WvzAHaoG9nxPi5d%2BjYUqfAhhykOFwJWiAAAIfkECQoAAAAsAAAAACAAIAAABPAQyElpUqnqzaciSoVkXVUMFaFSwlpOCcMYlErAavhOMnNLNo8KsZsMZItJEIDIFSkLGQoQTNhIsFehRww2CQLKF0tYGKYSg%2BygsZIuNqJksKgbfgIGepNo2cIUB3V1B3IvNiBYNQaDSTtfhhx0CwVPI0UJe0%2Bbm4g5VgcGoqOcnjmjqDSdnhgEoamcsZuXO1aWQy8KAwOAuTYYGwi7w5h%2BKr0SJ8MFihpNbx%2B4Erq7BYBuzsdiH1jCAzoSfl0rVirNbRXlBBlLX%2BBP0XJLAPGzTkAuAOqb0WT5AH7OcdCm5B8TgRwSRKIHQtaLCwg1RAAAOwAAAAAAAAAAAA%3D%3D);
+  visibility: visible;
+  opacity: 0.6;
+  transition: all 0.3s ease; }
+
+.reveal .overlay header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 2;
+  border-bottom: 1px solid #222; }
+
+.reveal .overlay header a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 36px;
+  padding: 0 10px;
+  float: right;
+  opacity: 0.6;
+  box-sizing: border-box; }
+
+.reveal .overlay header a:hover {
+  opacity: 1; }
+
+.reveal .overlay header a .icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-position: 50% 50%;
+  background-size: 100%;
+  background-repeat: no-repeat; }
+
+.reveal .overlay header a.close .icon {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABkklEQVRYR8WX4VHDMAxG6wnoJrABZQPYBCaBTWAD2g1gE5gg6OOsXuxIlr40d81dfrSJ9V4c2VLK7spHuTJ/5wpM07QXuXc5X0opX2tEJcadjHuV80li/FgxTIEK/5QBCICBD6xEhSMGHgQPgBgLiYVAB1dpSqKDawxTohFw4JSEA3clzgIBPCURwE2JucBR7rhPJJv5OpJwDX+SfDjgx1wACQeJG1aChP9K/IMmdZ8DtESV1WyP3Bt4MwM6sj4NMxMYiqUWHQu4KYA/SYkIjOsm3BXYWMKFDwU2khjCQ4ELJUJ4SmClRArOCmSXGuKma0fYD5CbzHxFpCSGAhfAVSSUGDUk2BWZaff2g6GE15BsBQ9nwmpIGDiyHQddwNTMKkbZaf9fajXQca1EX44puJZUsnY0ObGmITE3GVLCbEhQUjGVt146j6oasWN+49Vph2w1pZ5EansNZqKBm1txbU57iRRcZ86RWMDdWtBJUHBHwoQPi1GV+JCbntmvok7iTX4/Up9mgyTc/FJYDTcndgH/AA5A/CHsyEkVAAAAAElFTkSuQmCC); }
+
+.reveal .overlay header a.external .icon {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAcElEQVRYR+2WSQoAIQwEzf8f7XiOMkUQxUPlGkM3hVmiQfQR9GYnH1SsAQlI4DiBqkCMoNb9y2e90IAEJPAcgdznU9+engMaeJ7Azh5Y1U67gAho4DqBqmB1buAf0MB1AlVBek83ZPkmJMGc1wAR+AAqod/B97TRpQAAAABJRU5ErkJggg==); }
+
+.reveal .overlay .viewport {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  top: 40px;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.reveal .overlay.overlay-preview .viewport iframe {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease; }
+
+.reveal .overlay.overlay-preview.loaded .viewport iframe {
+  opacity: 1;
+  visibility: visible; }
+
+.reveal .overlay.overlay-preview.loaded .viewport-inner {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 45%;
+  width: 100%;
+  text-align: center;
+  letter-spacing: normal; }
+
+.reveal .overlay.overlay-preview .x-frame-error {
+  opacity: 0;
+  transition: opacity 0.3s ease 0.3s; }
+
+.reveal .overlay.overlay-preview.loaded .x-frame-error {
+  opacity: 1; }
+
+.reveal .overlay.overlay-preview.loaded .spinner {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(0.2);
+          transform: scale(0.2); }
+
+.reveal .overlay.overlay-help .viewport {
+  overflow: auto;
+  color: #fff; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner {
+  width: 600px;
+  margin: auto;
+  padding: 20px 20px 80px 20px;
+  text-align: center;
+  letter-spacing: normal; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner .title {
+  font-size: 20px; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner table {
+  border: 1px solid #fff;
+  border-collapse: collapse;
+  font-size: 16px; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner table th,
+.reveal .overlay.overlay-help .viewport .viewport-inner table td {
+  width: 200px;
+  padding: 14px;
+  border: 1px solid #fff;
+  vertical-align: middle; }
+
+.reveal .overlay.overlay-help .viewport .viewport-inner table th {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+/*********************************************
+ * PLAYBACK COMPONENT
+ *********************************************/
+.reveal .playback {
+  position: absolute;
+  left: 15px;
+  bottom: 20px;
+  z-index: 30;
+  cursor: pointer;
+  transition: all 400ms ease;
+  -webkit-tap-highlight-color: transparent; }
+
+.reveal.overview .playback {
+  opacity: 0;
+  visibility: hidden; }
+
+/*********************************************
+ * ROLLING LINKS
+ *********************************************/
+.reveal .roll {
+  display: inline-block;
+  line-height: 1.2;
+  overflow: hidden;
+  vertical-align: top;
+  -webkit-perspective: 400px;
+          perspective: 400px;
+  -webkit-perspective-origin: 50% 50%;
+          perspective-origin: 50% 50%; }
+
+.reveal .roll:hover {
+  background: none;
+  text-shadow: none; }
+
+.reveal .roll span {
+  display: block;
+  position: relative;
+  padding: 0 2px;
+  pointer-events: none;
+  transition: all 400ms ease;
+  -webkit-transform-origin: 50% 0%;
+          transform-origin: 50% 0%;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.reveal .roll:hover span {
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-transform: translate3d(0px, 0px, -45px) rotateX(90deg);
+          transform: translate3d(0px, 0px, -45px) rotateX(90deg); }
+
+.reveal .roll span:after {
+  content: attr(data-title);
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0 2px;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform-origin: 50% 0%;
+          transform-origin: 50% 0%;
+  -webkit-transform: translate3d(0px, 110%, 0px) rotateX(-90deg);
+          transform: translate3d(0px, 110%, 0px) rotateX(-90deg); }
+
+/*********************************************
+ * SPEAKER NOTES
+ *********************************************/
+.reveal aside.notes {
+  display: none; }
+
+.reveal .speaker-notes {
+  display: none;
+  position: absolute;
+  width: 25vw;
+  height: 100%;
+  top: 0;
+  left: 100%;
+  padding: 14px 18px 14px 18px;
+  z-index: 1;
+  font-size: 18px;
+  line-height: 1.4;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  color: #222;
+  background-color: #f5f5f5;
+  overflow: auto;
+  box-sizing: border-box;
+  text-align: left;
+  font-family: Helvetica, sans-serif;
+  -webkit-overflow-scrolling: touch; }
+  .reveal .speaker-notes .notes-placeholder {
+    color: #ccc;
+    font-style: italic; }
+  .reveal .speaker-notes:focus {
+    outline: none; }
+  .reveal .speaker-notes:before {
+    content: 'Speaker notes';
+    display: block;
+    margin-bottom: 10px;
+    opacity: 0.5; }
+
+.reveal.show-notes {
+  max-width: 75vw;
+  overflow: visible; }
+
+.reveal.show-notes .speaker-notes {
+  display: block; }
+
+@media screen and (min-width: 1600px) {
+  .reveal .speaker-notes {
+    font-size: 20px; } }
+
+@media screen and (max-width: 1024px) {
+  .reveal.show-notes {
+    border-left: 0;
+    max-width: none;
+    max-height: 70%;
+    overflow: visible; }
+  .reveal.show-notes .speaker-notes {
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 42.8571428571%; } }
+
+@media screen and (max-width: 600px) {
+  .reveal.show-notes {
+    max-height: 60%; }
+  .reveal.show-notes .speaker-notes {
+    top: 100%;
+    height: 66.6666666667%; }
+  .reveal .speaker-notes {
+    font-size: 14px; } }
+
+/*********************************************
+ * ZOOM PLUGIN
+ *********************************************/
+.zoomed .reveal *,
+.zoomed .reveal *:before,
+.zoomed .reveal *:after {
+  -webkit-backface-visibility: visible !important;
+          backface-visibility: visible !important; }
+
+.zoomed .reveal .progress,
+.zoomed .reveal .controls {
+  opacity: 0; }
+
+.zoomed .reveal .roll span {
+  background: none; }
+
+.zoomed .reveal .roll span:after {
+  visibility: hidden; }
+
+      
+      </style>
+      <link rel="stylesheet" href="file:///c:\Users\user\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.0\node_modules\@shd101wyy\mume\dependencies\reveal\css\theme\white.css">
+      <link rel="stylesheet" href="file:///c:\Users\user\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.0\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+
+      
+        <script src="file:///c:\Users\user\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.0\node_modules\@shd101wyy\mume\dependencies\reveal\lib\js\head.min.js"></script>
+        <script src="file:///c:\Users\user\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.0\node_modules\@shd101wyy\mume\dependencies\reveal\js\reveal.js"></script>
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+abap+actionscript+ada+apacheconf+apl+applescript+asciidoc+aspnet+autoit+autohotkey+bash+basic+batch+c+brainfuck+bro+bison+csharp+cpp+coffeescript+ruby+css-extras+d+dart+django+diff+docker+eiffel+elixir+erlang+fsharp+fortran+gherkin+git+glsl+go+graphql+groovy+haml+handlebars+haskell+haxe+http+icon+inform7+ini+j+jade+java+jolie+json+julia+keyman+kotlin+latex+less+livescript+lolcode+lua+makefile+markdown+matlab+mel+mizar+monkey+nasm+nginx+nim+nix+nsis+objectivec+ocaml+oz+parigp+parser+pascal+perl+php+php-extras+powershell+processing+prolog+properties+protobuf+puppet+pure+python+q+qore+r+jsx+reason+rest+rip+roboconf+crystal+rust+sas+sass+scss+scala+scheme+smalltalk+smarty+sql+stylus+swift+tcl+textile+twig+typescript+vbnet+verilog+vhdl+vim+wiki+xojo+yaml */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+/* highlight */
+pre[data-line] {
+	position: relative;
+	padding: 1em 0 1em 3em;
+  }
+  pre[data-line] .line-highlight-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: transparent;
+	display: block;
+	width: 100%;
+  }
+  
+  pre[data-line] .line-highlight {
+	position: absolute;
+	left: 0;
+	right: 0;
+	padding: inherit 0;
+	margin-top: 1em;
+	background: hsla(24, 20%, 50%,.08);
+	background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+	pointer-events: none;
+	line-height: inherit;
+	white-space: pre;
+  }
+  
+  pre[data-line] .line-highlight:before, 
+  pre[data-line] .line-highlight[data-end]:after {
+	content: attr(data-start);
+	position: absolute;
+	top: .4em;
+	left: .6em;
+	min-width: 1em;
+	padding: 0 .5em;
+	background-color: hsla(24, 20%, 50%,.4);
+	color: hsl(24, 20%, 95%);
+	font: bold 65%/1.5 sans-serif;
+	text-align: center;
+	vertical-align: .3em;
+	border-radius: 999px;
+	text-shadow: none;
+	box-shadow: 0 1px white;
+  }
+  
+  pre[data-line] .line-highlight[data-end]:after {
+	content: attr(data-end);
+	top: auto;
+	bottom: .4em;
+  }.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export" data-presentation-mode>
+      <div class="mume markdown-preview  " data-presentation-mode>
+      
+    <div style="display:none;"></div>
+    <div class="reveal">
+      <div class="slides">
+        <section lineno="0" class="slide " data-line="0" data-h="0" data-v="0">
+<h1 class="mume-header" id="pointer">pointer</h1>
+
+</section><section lineno="3" class="slide " data-line="3" data-h="1" data-v="0">
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+</pre><p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="94pt" height="101pt" viewBox="0.00 0.00 94.00 101.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 97)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-97 90,-97 90,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster0</title>
+<polygon fill="none" stroke="#ffffff" points="8,-8 8,-85 78,-85 78,-8 8,-8"/>
+<text text-anchor="middle" x="43" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="70,-52 16,-52 16,-16 70,-16 70,-52"/>
+<text text-anchor="middle" x="43" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">100</text>
+</g>
+</g>
+</svg>
+</p></section><section lineno="22" class="slide " data-line="22" data-h="2" data-v="0">
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%d\n&quot;</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;0x%x\n&quot;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="33" class="slide " data-line="33" data-h="3" data-v="0">
+<pre data-role="codeBlock" data-info="output = 1" class="language-output"><code>&gt; 100
+&gt; 0x61ff2c
+</code></pre></section><section lineno="40" class="slide " data-line="40" data-h="4" data-v="0">
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="94pt" height="101pt" viewBox="0.00 0.00 94.00 101.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 97)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-97 90,-97 90,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster0</title>
+<polygon fill="none" stroke="#ffffff" points="8,-8 8,-85 78,-85 78,-8 8,-8"/>
+<text text-anchor="middle" x="43" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff2c</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="70,-52 16,-52 16,-16 70,-16 70,-52"/>
+<text text-anchor="middle" x="43" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">100</text>
+</g>
+</g>
+</svg>
+</p></section><section lineno="55" class="slide " data-line="55" data-h="5" data-v="0">
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>b <span class="token operator">=</span> <span class="token number">0x61ff2c</span><span class="token punctuation">;</span>
+</pre><p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="107pt" height="101pt" viewBox="0.00 0.00 106.54 101.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 97)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-97 102.5358,-97 102.5358,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster1</title>
+<polygon fill="none" stroke="#ffffff" points="8,-8 8,-85 90.5358,-85 90.5358,-8 8,-8"/>
+<text text-anchor="middle" x="49.2679" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="82.3053,-52 16.2305,-52 16.2305,-16 82.3053,-16 82.3053,-52"/>
+<text text-anchor="middle" x="49.2679" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff2c</text>
+</g>
+</g>
+</svg>
+</p></section><section lineno="74" class="slide " data-line="74" data-h="6" data-v="0">
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>b <span class="token operator">=</span> <span class="token number">0x61ff2c</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%x\n&quot;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%x\n&quot;</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%x\n&quot;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="87" class="slide " data-line="87" data-h="7" data-v="0">
+<pre data-role="codeBlock" data-info="output = 1" class="language-output"><code>&gt; 0x61ff2c
+&gt; 0x61ff2c
+&gt; 0x61ff28
+</code></pre></section><section lineno="94" class="slide " data-line="94" data-h="8" data-v="0">
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="107pt" height="186pt" viewBox="0.00 0.00 106.54 186.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 182)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-182 102.5358,-182 102.5358,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster0</title>
+<polygon fill="none" stroke="#ffffff" points="14.2679,-8 14.2679,-85 84.2679,-85 84.2679,-8 14.2679,-8"/>
+<text text-anchor="middle" x="49.2679" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster1</title>
+<polygon fill="none" stroke="#ffffff" points="8,-93 8,-170 90.5358,-170 90.5358,-93 8,-93"/>
+<text text-anchor="middle" x="49.2679" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="76.2679,-52 22.2679,-52 22.2679,-16 76.2679,-16 76.2679,-52"/>
+<text text-anchor="middle" x="49.2679" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">100</text>
+</g>
+<!-- b -->
+<g id="node2" class="node">
+<title>b</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="82.3053,-137 16.2305,-137 16.2305,-101 82.3053,-101 82.3053,-137"/>
+<text text-anchor="middle" x="49.2679" y="-114.8" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff2c</text>
+</g>
+</g>
+</svg>
+</p></section><section lineno="117" class="slide " data-line="117" data-h="9" data-v="0">
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="107pt" height="186pt" viewBox="0.00 0.00 106.54 186.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 182)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-182 102.5358,-182 102.5358,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster0</title>
+<polygon fill="none" stroke="#ffffff" points="14.2679,-8 14.2679,-85 84.2679,-85 84.2679,-8 14.2679,-8"/>
+<text text-anchor="middle" x="49.2679" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff2c</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster1</title>
+<polygon fill="none" stroke="#ffffff" points="8,-93 8,-170 90.5358,-170 90.5358,-93 8,-93"/>
+<text text-anchor="middle" x="49.2679" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff28</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="76.2679,-52 22.2679,-52 22.2679,-16 76.2679,-16 76.2679,-52"/>
+<text text-anchor="middle" x="49.2679" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">100</text>
+</g>
+<!-- b -->
+<g id="node2" class="node">
+<title>b</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="82.3053,-137 16.2305,-137 16.2305,-101 82.3053,-101 82.3053,-137"/>
+<text text-anchor="middle" x="49.2679" y="-114.8" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff2c</text>
+</g>
+</g>
+</svg>
+</p></section><section lineno="139" class="slide " data-line="139" data-h="10" data-v="0">
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="197pt" height="101pt" viewBox="0.00 0.00 196.54 101.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 97)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-97 192.5358,-97 192.5358,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster0</title>
+<polygon fill="none" stroke="#ffffff" points="110.5358,-8 110.5358,-85 180.5358,-85 180.5358,-8 110.5358,-8"/>
+<text text-anchor="middle" x="145.5358" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff2c</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster1</title>
+<polygon fill="none" stroke="#ffffff" points="8,-8 8,-85 90.5358,-85 90.5358,-8 8,-8"/>
+<text text-anchor="middle" x="49.2679" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff28</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="172.5358,-52 118.5358,-52 118.5358,-16 172.5358,-16 172.5358,-52"/>
+<text text-anchor="middle" x="145.5358" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">100</text>
+</g>
+<!-- b -->
+<g id="node2" class="node">
+<title>b</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="82.3053,-52 16.2305,-52 16.2305,-16 82.3053,-16 82.3053,-52"/>
+<text text-anchor="middle" x="49.2679" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff2c</text>
+</g>
+<!-- b&#45;&gt;a -->
+<g id="edge1" class="edge">
+<title>b-&gt;a</title>
+<path fill="none" stroke="#000000" d="M82.3979,-34C90.7499,-34 99.7715,-34 108.3099,-34"/>
+<polygon fill="#000000" stroke="#000000" points="108.4075,-37.5001 118.4075,-34 108.4075,-30.5001 108.4075,-37.5001"/>
+</g>
+</g>
+</svg>
+</p></section><section lineno="162" class="slide " data-line="162" data-h="11" data-v="0">
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>b <span class="token operator">=</span> <span class="token operator">&amp;</span>a<span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%d\n&quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="173" class="slide " data-line="173" data-h="12" data-v="0">
+<pre data-role="codeBlock" data-info="output = 1" class="language-output"><code>&gt; 100
+</code></pre></section><section lineno="178" class="slide " data-line="178" data-h="13" data-v="0">
+<h2 class="mume-header" id="%E9%A1%8C%E7%9B%AE1">&#x984C;&#x76EE;1</h2>
+
+</section><section lineno="182" class="slide " data-line="182" data-h="14" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE1-%E6%95%98%E8%BF%B0">&#x984C;&#x76EE;1-&#x6558;&#x8FF0;</h3>
+
+<p>&#x5229;&#x7528;&#x6846;&#x67B6;&#x5BEB;&#x4E00;&#x500B;function&#xFF0C;&#x5C07;&#x50B3;&#x5165;&#x7684;&#x5169;&#x500B;&#x503C;&#x4EA4;&#x63DB;</p>
+</section><section lineno="188" class="slide " data-line="188" data-h="15" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE1-%E6%A1%86%E6%9E%B6">&#x984C;&#x76EE;1-&#x6846;&#x67B6;</h3>
+
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> n1<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span> n2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num1<span class="token punctuation">,</span> num2<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">&quot;%d%d&quot;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>num1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;before: %d %d\n&quot;</span><span class="token punctuation">,</span> num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">swap</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>num1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;after: %d %d\n&quot;</span><span class="token punctuation">,</span> num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="205" class="slide " data-line="205" data-h="16" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE1-%E7%AF%84%E4%BE%8B%E8%BC%B8%E5%85%A5">&#x984C;&#x76EE;1-&#x7BC4;&#x4F8B;&#x8F38;&#x5165;</h3>
+
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>3 4
+</code></pre><h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE1-%E7%AF%84%E4%BE%8B%E8%BC%B8%E5%87%BA">&#x984C;&#x76EE;1-&#x7BC4;&#x4F8B;&#x8F38;&#x51FA;</h3>
+
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>&gt; before: 3 4
+&gt; after: 4 3
+</code></pre></section><section lineno="220" class="slide " data-line="220" data-h="17" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE1-%E5%9C%96%E8%A7%A3">&#x984C;&#x76EE;1-&#x5716;&#x89E3;</h3>
+
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="233pt" height="186pt" viewBox="0.00 0.00 233.32 186.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 182)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-182 229.3212,-182 229.3212,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster0</title>
+<polygon fill="none" stroke="#ffffff" points="116.3212,-8 116.3212,-85 225.3212,-85 225.3212,-8 116.3212,-8"/>
+<text text-anchor="middle" x="170.8212" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">num1 : 0x61ff2c</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster1</title>
+<polygon fill="none" stroke="#ffffff" points="4.3927,-8 4.3927,-85 95.9285,-85 95.9285,-8 4.3927,-8"/>
+<text text-anchor="middle" x="50.1606" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">n1 : 0x61ff10</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster2</title>
+<polygon fill="none" stroke="#ffffff" points="115.3212,-93 115.3212,-170 225.3212,-170 225.3212,-93 115.3212,-93"/>
+<text text-anchor="middle" x="170.3212" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#000000">num2 : 0x61ff28</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster3</title>
+<polygon fill="none" stroke="#ffffff" points="4,-93 4,-170 95.3212,-170 95.3212,-93 4,-93"/>
+<text text-anchor="middle" x="49.6606" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#000000">n2 : 0x61ff14</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="197.3212,-52 143.3212,-52 143.3212,-16 197.3212,-16 197.3212,-52"/>
+<text text-anchor="middle" x="170.3212" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">4</text>
+</g>
+<!-- b -->
+<g id="node2" class="node">
+<title>b</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="82.698,-52 16.6232,-52 16.6232,-16 82.698,-16 82.698,-52"/>
+<text text-anchor="middle" x="49.6606" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff2c</text>
+</g>
+<!-- b&#45;&gt;a -->
+<g id="edge1" class="edge">
+<title>b-&gt;a</title>
+<path fill="none" stroke="#000000" d="M82.951,-34C98.5152,-34 117.1068,-34 133.1312,-34"/>
+<polygon fill="#000000" stroke="#000000" points="133.2332,-37.5001 143.2332,-34 133.2332,-30.5001 133.2332,-37.5001"/>
+</g>
+<!-- a2 -->
+<g id="node3" class="node">
+<title>a2</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="197.3212,-137 143.3212,-137 143.3212,-101 197.3212,-101 197.3212,-137"/>
+<text text-anchor="middle" x="170.3212" y="-114.8" font-family="Times,serif" font-size="14.00" fill="#000000">3</text>
+</g>
+<!-- b2 -->
+<g id="node4" class="node">
+<title>b2</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="83.4826,-137 15.8386,-137 15.8386,-101 83.4826,-101 83.4826,-137"/>
+<text text-anchor="middle" x="49.6606" y="-114.8" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff28</text>
+</g>
+<!-- b2&#45;&gt;a2 -->
+<g id="edge2" class="edge">
+<title>b2-&gt;a2</title>
+<path fill="none" stroke="#000000" d="M83.5924,-119C98.8837,-119 116.9934,-119 132.699,-119"/>
+<polygon fill="#000000" stroke="#000000" points="133.1239,-122.5001 143.1239,-119 133.1239,-115.5001 133.1239,-122.5001"/>
+</g>
+</g>
+</svg>
+</p></section><section lineno="262" class="slide " data-line="262" data-h="18" data-v="0">
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="233pt" height="186pt" viewBox="0.00 0.00 233.32 186.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 182)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-182 229.3212,-182 229.3212,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster0</title>
+<polygon fill="none" stroke="#ffffff" points="116.3212,-8 116.3212,-85 225.3212,-85 225.3212,-8 116.3212,-8"/>
+<text text-anchor="middle" x="170.8212" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">num1 : 0x61ff2c</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster1</title>
+<polygon fill="none" stroke="#ffffff" points="4.3927,-8 4.3927,-85 95.9285,-85 95.9285,-8 4.3927,-8"/>
+<text text-anchor="middle" x="50.1606" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#000000">n1 : 0x61ff10</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster2</title>
+<polygon fill="none" stroke="#ffffff" points="115.3212,-93 115.3212,-170 225.3212,-170 225.3212,-93 115.3212,-93"/>
+<text text-anchor="middle" x="170.3212" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#000000">num2 : 0x61ff28</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster3</title>
+<polygon fill="none" stroke="#ffffff" points="4,-93 4,-170 95.3212,-170 95.3212,-93 4,-93"/>
+<text text-anchor="middle" x="49.6606" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#000000">n2 : 0x61ff14</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="197.3212,-52 143.3212,-52 143.3212,-16 197.3212,-16 197.3212,-52"/>
+<text text-anchor="middle" x="170.3212" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#ff0000">3</text>
+</g>
+<!-- b -->
+<g id="node2" class="node">
+<title>b</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="82.698,-52 16.6232,-52 16.6232,-16 82.698,-16 82.698,-52"/>
+<text text-anchor="middle" x="49.6606" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff2c</text>
+</g>
+<!-- b&#45;&gt;a -->
+<g id="edge1" class="edge">
+<title>b-&gt;a</title>
+<path fill="none" stroke="#000000" d="M82.951,-34C98.5152,-34 117.1068,-34 133.1312,-34"/>
+<polygon fill="#000000" stroke="#000000" points="133.2332,-37.5001 143.2332,-34 133.2332,-30.5001 133.2332,-37.5001"/>
+</g>
+<!-- a2 -->
+<g id="node3" class="node">
+<title>a2</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="197.3212,-137 143.3212,-137 143.3212,-101 197.3212,-101 197.3212,-137"/>
+<text text-anchor="middle" x="170.3212" y="-114.8" font-family="Times,serif" font-size="14.00" fill="#ff0000">4</text>
+</g>
+<!-- b2 -->
+<g id="node4" class="node">
+<title>b2</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="83.4826,-137 15.8386,-137 15.8386,-101 83.4826,-101 83.4826,-137"/>
+<text text-anchor="middle" x="49.6606" y="-114.8" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff28</text>
+</g>
+<!-- b2&#45;&gt;a2 -->
+<g id="edge2" class="edge">
+<title>b2-&gt;a2</title>
+<path fill="none" stroke="#000000" d="M83.5924,-119C98.8837,-119 116.9934,-119 132.699,-119"/>
+<polygon fill="#000000" stroke="#000000" points="133.1239,-122.5001 143.1239,-119 133.1239,-115.5001 133.1239,-122.5001"/>
+</g>
+</g>
+</svg>
+</p></section><section lineno="300" class="slide " data-line="300" data-h="19" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE1-%E7%A8%8B%E5%BC%8F%E7%A2%BC">&#x984C;&#x76EE;1-&#x7A0B;&#x5F0F;&#x78BC;</h3>
+
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> n1<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span> n2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> tmp <span class="token operator">=</span> <span class="token operator">*</span>n1<span class="token punctuation">;</span>
+    <span class="token operator">*</span>n1 <span class="token operator">=</span> <span class="token operator">*</span>n2<span class="token punctuation">;</span>
+    <span class="token operator">*</span>n2 <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num1<span class="token punctuation">,</span> num2<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">&quot;%d%d&quot;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>num1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;before: %d %d\n&quot;</span><span class="token punctuation">,</span> num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">swap</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>num1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;after: %d %d\n&quot;</span><span class="token punctuation">,</span> num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="320" class="slide " data-line="320" data-h="20" data-v="0">
+<h2 class="mume-header" id="call-by-address">Call by address</h2>
+
+<p>&#x9019;&#x7A2E;&#x50B3;&#x5165;&#x6307;&#x6A19;&#x7684;&#x65B9;&#x5F0F;&#x8F03;&#x505A;call by address</p>
+</section><section lineno="325" class="slide " data-line="325" data-h="21" data-v="0">
+<h3 class="mume-header" id="call-by-value">Call by value</h3>
+
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> n1<span class="token punctuation">,</span> <span class="token keyword">int</span> n2<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> tmp <span class="token operator">=</span> n1<span class="token punctuation">;</span>
+    n1 <span class="token operator">=</span> n2<span class="token punctuation">;</span>
+    n2 <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num1<span class="token punctuation">,</span> num2<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">&quot;%d%d&quot;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>num1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;before: %d %d\n&quot;</span><span class="token punctuation">,</span> num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">swap</span><span class="token punctuation">(</span>num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;after: %d %d\n&quot;</span><span class="token punctuation">,</span> num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="344" class="slide " data-line="344" data-h="22" data-v="0">
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>&lt; 3 4
+&gt; before: 3 4
+&gt; after: 3 4
+</code></pre></section><section lineno="351" class="slide " data-line="351" data-h="23" data-v="0">
+<h3 class="mume-header" id="call-by-value-%E5%9C%96%E8%A7%A3">Call by value &#x5716;&#x89E3;</h3>
+
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="451pt" height="101pt" viewBox="0.00 0.00 451.00 100.80" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 96.8)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-96.8 447,-96.8 447,4 -4,4"/>
+<g id="clust6" class="cluster">
+<title>cluster3</title>
+<polygon fill="none" stroke="#ffffff" points="343,-8 343,-84.8 435,-84.8 435,-8 343,-8"/>
+<text text-anchor="middle" x="389" y="-68.2" font-family="Times,serif" font-size="14.00" fill="#000000">n2 : 0x61ff14</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster1</title>
+<polygon fill="none" stroke="#ffffff" points="243,-8 243,-84.8 335,-84.8 335,-8 243,-8"/>
+<text text-anchor="middle" x="289" y="-68.2" font-family="Times,serif" font-size="14.00" fill="#000000">n1 : 0x61ff10</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster0</title>
+<polygon fill="none" stroke="#ffffff" points="8,-8 8,-84.8 117,-84.8 117,-8 8,-8"/>
+<text text-anchor="middle" x="62.5" y="-68.2" font-family="Times,serif" font-size="14.00" fill="#000000">num1 : 0x61ff2c</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster2</title>
+<polygon fill="none" stroke="#ffffff" points="125,-8 125,-84.8 235,-84.8 235,-8 125,-8"/>
+<text text-anchor="middle" x="180" y="-68.2" font-family="Times,serif" font-size="14.00" fill="#000000">num2 : 0x61ff28</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="89,-52 35,-52 35,-16 89,-16 89,-52"/>
+<text text-anchor="middle" x="62" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">3</text>
+</g>
+<!-- a2 -->
+<g id="node2" class="node">
+<title>a2</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="207,-52 153,-52 153,-16 207,-16 207,-52"/>
+<text text-anchor="middle" x="180" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">4</text>
+</g>
+<!-- b -->
+<g id="node3" class="node">
+<title>b</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="316,-52 262,-52 262,-16 316,-16 316,-52"/>
+<text text-anchor="middle" x="289" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">3</text>
+</g>
+<!-- b2 -->
+<g id="node4" class="node">
+<title>b2</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="416,-52 362,-52 362,-16 416,-16 416,-52"/>
+<text text-anchor="middle" x="389" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">4</text>
+</g>
+</g>
+</svg>
+</p></section><section lineno="387" class="slide " data-line="387" data-h="24" data-v="0">
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="451pt" height="101pt" viewBox="0.00 0.00 451.00 100.80" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 96.8)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-96.8 447,-96.8 447,4 -4,4"/>
+<g id="clust2" class="cluster">
+<title>cluster0</title>
+<polygon fill="none" stroke="#ffffff" points="8,-8 8,-84.8 117,-84.8 117,-8 8,-8"/>
+<text text-anchor="middle" x="62.5" y="-68.2" font-family="Times,serif" font-size="14.00" fill="#000000">num1 : 0x61ff2c</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster2</title>
+<polygon fill="none" stroke="#ffffff" points="125,-8 125,-84.8 235,-84.8 235,-8 125,-8"/>
+<text text-anchor="middle" x="180" y="-68.2" font-family="Times,serif" font-size="14.00" fill="#000000">num2 : 0x61ff28</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster1</title>
+<polygon fill="none" stroke="#ffffff" points="243,-8 243,-84.8 335,-84.8 335,-8 243,-8"/>
+<text text-anchor="middle" x="289" y="-68.2" font-family="Times,serif" font-size="14.00" fill="#000000">n1 : 0x61ff10</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster3</title>
+<polygon fill="none" stroke="#ffffff" points="343,-8 343,-84.8 435,-84.8 435,-8 343,-8"/>
+<text text-anchor="middle" x="389" y="-68.2" font-family="Times,serif" font-size="14.00" fill="#000000">n2 : 0x61ff14</text>
+</g>
+<!-- a -->
+<g id="node1" class="node">
+<title>a</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="89,-52 35,-52 35,-16 89,-16 89,-52"/>
+<text text-anchor="middle" x="62" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">3</text>
+</g>
+<!-- a2 -->
+<g id="node2" class="node">
+<title>a2</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="207,-52 153,-52 153,-16 207,-16 207,-52"/>
+<text text-anchor="middle" x="180" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#000000">4</text>
+</g>
+<!-- b -->
+<g id="node3" class="node">
+<title>b</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="316,-52 262,-52 262,-16 316,-16 316,-52"/>
+<text text-anchor="middle" x="289" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#ff0000">4</text>
+</g>
+<!-- b2 -->
+<g id="node4" class="node">
+<title>b2</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="416,-52 362,-52 362,-16 416,-16 416,-52"/>
+<text text-anchor="middle" x="389" y="-29.8" font-family="Times,serif" font-size="14.00" fill="#ff0000">3</text>
+</g>
+</g>
+</svg>
+</p></section><section lineno="419" class="slide " data-line="419" data-h="25" data-v="0">
+<h3 class="mume-header" id="scanf">scanf</h3>
+
+<pre data-role="codeBlock" data-info="C" class="language-c"><span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">&quot;%d%d&quot;</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>num1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre><ul>
+<li>Call by address(?)</li>
+<li>Call by value(?)</li>
+</ul>
+</section><section lineno="429" class="slide " data-line="429" data-h="26" data-v="0">
+<h2 class="mume-header" id="%E9%A1%8C%E7%9B%AE2">&#x984C;&#x76EE;2</h2>
+
+</section><section lineno="433" class="slide " data-line="433" data-h="27" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE2-%E6%95%98%E8%BF%B0">&#x984C;&#x76EE;2-&#x6558;&#x8FF0;</h3>
+
+<p>&#x5229;&#x7528;&#x6846;&#x67B6;&#x5BEB;&#x4E00;&#x500B;function&#xFF0C;&#x627E;&#x51FA;&#x9663;&#x5217;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x503C;&#x8207;&#x6700;&#x5C0F;&#x503C;<br>
+<strong>&#x6B64;&#x984C;&#x6709;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x6846;&#x67B6;&#xFF0C;&#x4F86;&#x9054;&#x6210;&#x984C;&#x610F;</strong></p>
+</section><section lineno="440" class="slide " data-line="440" data-h="28" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE2-%E6%A1%86%E6%9E%B6">&#x984C;&#x76EE;2-&#x6846;&#x67B6;</h3>
+
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">define</span> MIN -2147483638</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> MAX 2147483647</span>
+
+<span class="token keyword">void</span> <span class="token function">find</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> max<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span> min<span class="token punctuation">,</span> <span class="token keyword">int</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> arrSize<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//TODO</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> myArr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">44</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> max<span class="token punctuation">,</span> min<span class="token punctuation">;</span>
+    <span class="token function">find</span><span class="token punctuation">(</span>max<span class="token punctuation">,</span> min<span class="token punctuation">,</span> myArr<span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;max: %d, min: %d\n&quot;</span><span class="token punctuation">,</span> max<span class="token punctuation">,</span> min<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="460" class="slide " data-line="460" data-h="29" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE2-%E7%AF%84%E4%BE%8B%E8%BC%B8%E5%85%A5">&#x984C;&#x76EE;2-&#x7BC4;&#x4F8B;&#x8F38;&#x5165;</h3>
+
+<p>&#x7121;</p>
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE2-%E7%AF%84%E4%BE%8B%E8%BC%B8%E5%87%BA">&#x984C;&#x76EE;2-&#x7BC4;&#x4F8B;&#x8F38;&#x51FA;</h3>
+
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>&gt; max: 55, min: 0
+</code></pre></section><section lineno="472" class="slide " data-line="472" data-h="30" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE2-%E7%A8%8B%E5%BC%8F%E7%A2%BC1">&#x984C;&#x76EE;2-&#x7A0B;&#x5F0F;&#x78BC;1</h3>
+
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">define</span> MIN -2147483638</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> MAX 2147483647</span>
+
+<span class="token keyword">void</span> <span class="token function">find</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> max<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span> min<span class="token punctuation">,</span> <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> arrSize<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token operator">*</span>max <span class="token operator">=</span> MIN<span class="token punctuation">;</span>
+    <span class="token operator">*</span>min <span class="token operator">=</span> MAX<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arrSize<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&gt;</span> <span class="token operator">*</span>max<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token operator">*</span>max <span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;</span> <span class="token operator">*</span>min<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token operator">*</span>min <span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</pre></section><section lineno="494" class="slide " data-line="494" data-h="31" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE2-%E7%A8%8B%E5%BC%8F%E7%A2%BC2">&#x984C;&#x76EE;2-&#x7A0B;&#x5F0F;&#x78BC;2</h3>
+
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> myArr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">44</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> max<span class="token punctuation">,</span> min<span class="token punctuation">;</span>
+    <span class="token function">find</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>max<span class="token punctuation">,</span> <span class="token operator">&amp;</span>min<span class="token punctuation">,</span> myArr<span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;max: %d, min: %d\n&quot;</span><span class="token punctuation">,</span> max<span class="token punctuation">,</span> min<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="507" class="slide " data-line="507" data-h="32" data-v="0">
+<h2 class="mume-header" id="%E9%99%A3%E5%88%97-vs-%E6%8C%87%E6%A8%99">&#x9663;&#x5217; VS &#x6307;&#x6A19;</h2>
+
+</section><section lineno="510" class="slide " data-line="510" data-h="33" data-v="0">
+<h3 class="mume-header" id="%E9%99%A3%E5%88%97%E7%A8%8B%E5%BC%8F%E7%A2%BC">&#x9663;&#x5217;&#x7A0B;&#x5F0F;&#x78BC;</h3>
+
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre><p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="192pt" height="45pt" viewBox="0.00 0.00 192.00 45.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 41)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-41 188,-41 188,4 -4,4"/>
+<!-- array -->
+<g id="node1" class="node">
+<title>array</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="0,-.5 0,-36.5 184,-36.5 184,-.5 0,-.5"/>
+<text text-anchor="middle" x="11.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">0</text>
+<polyline fill="none" stroke="#000000" points="23,-.7 23,-36.5 "/>
+<text text-anchor="middle" x="34.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">1</text>
+<polyline fill="none" stroke="#000000" points="46,-.7 46,-36.5 "/>
+<text text-anchor="middle" x="57.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">2</text>
+<polyline fill="none" stroke="#000000" points="69,-.7 69,-36.5 "/>
+<text text-anchor="middle" x="80.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">3</text>
+<polyline fill="none" stroke="#000000" points="92,-.7 92,-36.5 "/>
+<text text-anchor="middle" x="103.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">4</text>
+<polyline fill="none" stroke="#000000" points="115,-.7 115,-36.5 "/>
+<text text-anchor="middle" x="126.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">5</text>
+<polyline fill="none" stroke="#000000" points="138,-.7 138,-36.5 "/>
+<text text-anchor="middle" x="149.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">6</text>
+<polyline fill="none" stroke="#000000" points="161,-.7 161,-36.5 "/>
+<text text-anchor="middle" x="172.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">7</text>
+</g>
+</g>
+</svg>
+</p></section><section lineno="527" class="slide " data-line="527" data-h="34" data-v="0">
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="535" class="slide " data-line="535" data-h="35" data-v="0">
+<pre data-role="codeBlock" data-info="C++" class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span> </span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;0x%x&quot;</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="544" class="slide " data-line="544" data-h="36" data-v="0">
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>&gt; 0x61ff10
+</code></pre></section><section lineno="549" class="slide " data-line="549" data-h="37" data-v="0">
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="282pt" height="45pt" viewBox="0.00 0.00 282.00 45.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 41)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-41 278,-41 278,4 -4,4"/>
+<!-- array -->
+<g id="node1" class="node">
+<title>array</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="90,-.5 90,-36.5 274,-36.5 274,-.5 90,-.5"/>
+<text text-anchor="middle" x="101.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">0</text>
+<polyline fill="none" stroke="#000000" points="113,-.7 113,-36.5 "/>
+<text text-anchor="middle" x="124.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">1</text>
+<polyline fill="none" stroke="#000000" points="136,-.7 136,-36.5 "/>
+<text text-anchor="middle" x="147.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">2</text>
+<polyline fill="none" stroke="#000000" points="159,-.7 159,-36.5 "/>
+<text text-anchor="middle" x="170.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">3</text>
+<polyline fill="none" stroke="#000000" points="182,-.7 182,-36.5 "/>
+<text text-anchor="middle" x="193.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">4</text>
+<polyline fill="none" stroke="#000000" points="205,-.7 205,-36.5 "/>
+<text text-anchor="middle" x="216.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">5</text>
+<polyline fill="none" stroke="#000000" points="228,-.7 228,-36.5 "/>
+<text text-anchor="middle" x="239.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">6</text>
+<polyline fill="none" stroke="#000000" points="251,-.7 251,-36.5 "/>
+<text text-anchor="middle" x="262.5" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">7</text>
+</g>
+<!-- a -->
+<g id="node2" class="node">
+<title>a</title>
+<text text-anchor="middle" x="27" y="-14.3" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- a&#45;&gt;array -->
+<g id="edge1" class="edge">
+<title>a-&gt;array:f0</title>
+<path fill="none" stroke="#000000" d="M54.2887,-18.5C62.254,-18.5 71.1718,-18.5 79.9035,-18.5"/>
+<polygon fill="#000000" stroke="#000000" points="80,-22.0001 90,-18.5 80,-15.0001 80,-22.0001"/>
+</g>
+</g>
+</svg>
+</p></section><section lineno="561" class="slide " data-line="561" data-h="38" data-v="0">
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="290pt" height="118pt" viewBox="0.00 0.00 289.98 118.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 114)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-114 285.979,-114 285.979,4 -4,4"/>
+<!-- array -->
+<g id="node1" class="node">
+<title>array</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="41.9895,-.5 41.9895,-36.5 225.9895,-36.5 225.9895,-.5 41.9895,-.5"/>
+<text text-anchor="middle" x="53.4895" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">0</text>
+<polyline fill="none" stroke="#000000" points="64.9895,-.7 64.9895,-36.5 "/>
+<text text-anchor="middle" x="76.4895" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">1</text>
+<polyline fill="none" stroke="#000000" points="87.9895,-.7 87.9895,-36.5 "/>
+<text text-anchor="middle" x="99.4895" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">2</text>
+<polyline fill="none" stroke="#000000" points="110.9895,-.7 110.9895,-36.5 "/>
+<text text-anchor="middle" x="122.4895" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">3</text>
+<polyline fill="none" stroke="#000000" points="133.9895,-.7 133.9895,-36.5 "/>
+<text text-anchor="middle" x="145.4895" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">4</text>
+<polyline fill="none" stroke="#000000" points="156.9895,-.7 156.9895,-36.5 "/>
+<text text-anchor="middle" x="168.4895" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">5</text>
+<polyline fill="none" stroke="#000000" points="179.9895,-.7 179.9895,-36.5 "/>
+<text text-anchor="middle" x="191.4895" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">6</text>
+<polyline fill="none" stroke="#000000" points="202.9895,-.7 202.9895,-36.5 "/>
+<text text-anchor="middle" x="214.4895" y="-14.4" font-family="Times,serif" font-size="14.00" fill="#000000">7</text>
+</g>
+<!-- array2 -->
+<g id="node2" class="node">
+<title>array2</title>
+<polygon fill="#ffffff" stroke="#ffffff" points="0,-73.5 0,-109.5 281.979,-109.5 281.979,-73.5 0,-73.5"/>
+<text text-anchor="middle" x="11.1073" y="-87.4" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+<polyline fill="none" stroke="#ffffff" points="22.2146,-73.7 22.2146,-109.5 "/>
+<text text-anchor="middle" x="40.7692" y="-87.4" font-family="Times,serif" font-size="14.00" fill="#000000">a+1</text>
+<polyline fill="none" stroke="#ffffff" points="59.3238,-73.7 59.3238,-109.5 "/>
+<text text-anchor="middle" x="77.8784" y="-87.4" font-family="Times,serif" font-size="14.00" fill="#000000">a+2</text>
+<polyline fill="none" stroke="#ffffff" points="96.433,-73.7 96.433,-109.5 "/>
+<text text-anchor="middle" x="114.9876" y="-87.4" font-family="Times,serif" font-size="14.00" fill="#000000">a+3</text>
+<polyline fill="none" stroke="#ffffff" points="133.5422,-73.7 133.5422,-109.5 "/>
+<text text-anchor="middle" x="152.0968" y="-87.4" font-family="Times,serif" font-size="14.00" fill="#000000">a+4</text>
+<polyline fill="none" stroke="#ffffff" points="170.6514,-73.7 170.6514,-109.5 "/>
+<text text-anchor="middle" x="189.206" y="-87.4" font-family="Times,serif" font-size="14.00" fill="#000000">a+5</text>
+<polyline fill="none" stroke="#ffffff" points="207.7606,-73.7 207.7606,-109.5 "/>
+<text text-anchor="middle" x="226.3152" y="-87.4" font-family="Times,serif" font-size="14.00" fill="#000000">a+6</text>
+<polyline fill="none" stroke="#ffffff" points="244.8698,-73.7 244.8698,-109.5 "/>
+<text text-anchor="middle" x="263.4244" y="-87.4" font-family="Times,serif" font-size="14.00" fill="#000000">a+7</text>
+</g>
+<!-- array2&#45;&gt;array -->
+<g id="edge1" class="edge">
+<title>array2:f0-&gt;array:f0</title>
+<path fill="none" stroke="#000000" d="M10.9895,-73.5C10.9895,-52.7044 40.3387,-58.205 49.969,-46.0378"/>
+<polygon fill="#000000" stroke="#000000" points="53.307,-47.0901 52.9895,-36.5 46.6336,-44.9766 53.307,-47.0901"/>
+</g>
+<!-- array2&#45;&gt;array -->
+<g id="edge2" class="edge">
+<title>array2:f1-&gt;array:f1</title>
+<path fill="none" stroke="#000000" d="M40.9895,-73.5C40.9895,-54.9313 64.5414,-57.1612 73.0054,-46.0671"/>
+<polygon fill="#000000" stroke="#000000" points="76.353,-47.0886 75.9895,-36.5 69.6706,-45.0042 76.353,-47.0886"/>
+</g>
+<!-- array2&#45;&gt;array -->
+<g id="edge3" class="edge">
+<title>array2:f2-&gt;array:f2</title>
+<path fill="none" stroke="#000000" d="M77.9895,-73.5C77.9895,-58.7277 90.8069,-55.995 96.4145,-46.49"/>
+<polygon fill="#000000" stroke="#000000" points="99.8826,-47.0571 98.9895,-36.5 93.1042,-45.3099 99.8826,-47.0571"/>
+</g>
+<!-- array2&#45;&gt;array -->
+<g id="edge4" class="edge">
+<title>array2:f3-&gt;array:f3</title>
+<path fill="none" stroke="#000000" d="M114.9895,-73.5C114.9895,-60.8171 119.0095,-55.7196 120.9566,-46.7109"/>
+<polygon fill="#000000" stroke="#000000" points="124.4652,-46.8015 121.9895,-36.5 117.5008,-46.097 124.4652,-46.8015"/>
+</g>
+<!-- array2&#45;&gt;array -->
+<g id="edge5" class="edge">
+<title>array2:f4-&gt;array:f4</title>
+<path fill="none" stroke="#000000" d="M151.9895,-73.5C151.9895,-60.8754 148.5438,-55.7037 146.8748,-46.6891"/>
+<polygon fill="#000000" stroke="#000000" points="150.3421,-46.1595 145.9895,-36.5 143.3684,-46.7655 150.3421,-46.1595"/>
+</g>
+<!-- array2&#45;&gt;array -->
+<g id="edge6" class="edge">
+<title>array2:f5-&gt;array:f5</title>
+<path fill="none" stroke="#000000" d="M188.9895,-73.5C188.9895,-58.896 176.7825,-55.9371 171.4419,-46.4279"/>
+<polygon fill="#000000" stroke="#000000" points="174.7856,-45.3688 168.9895,-36.5 167.9898,-47.0476 174.7856,-45.3688"/>
+</g>
+<!-- array2&#45;&gt;array -->
+<g id="edge7" class="edge">
+<title>array2:f6-&gt;array:f6</title>
+<path fill="none" stroke="#000000" d="M225.9895,-73.5C225.9895,-55.3544 203.5442,-57.0129 195.1272,-46.2939"/>
+<polygon fill="#000000" stroke="#000000" points="198.3737,-44.9553 191.9895,-36.5 191.7074,-47.0911 198.3737,-44.9553"/>
+</g>
+<!-- array2&#45;&gt;array -->
+<g id="edge8" class="edge">
+<title>array2:f7-&gt;array:f7</title>
+<path fill="none" stroke="#000000" d="M262.9895,-73.5C262.9895,-50.773 228.8176,-59.2329 218.1389,-46.2518"/>
+<polygon fill="#000000" stroke="#000000" points="221.3935,-44.9404 214.9895,-36.5 214.7322,-47.0917 221.3935,-44.9404"/>
+</g>
+</g>
+</svg>
+</p></section><section lineno="580" class="slide " data-line="580" data-h="39" data-v="0">
+<pre data-role="codeBlock" data-info="C" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span> </span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;0x%x &quot;</span><span class="token punctuation">,</span> a<span class="token operator">+</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%d &quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>a <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="597" class="slide " data-line="597" data-h="40" data-v="0">
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>&gt; 0x61ff08 0x61ff0c 0x61ff10 0x61ff14 0x61ff18 0x61ff1c 0x61ff20 0x61ff24
+&gt; 0 1 2 3 4 5 6 7
+</code></pre></section><section lineno="605" class="slide " data-line="605" data-h="41" data-v="0">
+<h3 class="mume-header" id="array%E7%9A%84address%E5%B7%AE%E8%B7%9D">array&#x7684;address&#x5DEE;&#x8DDD;</h3>
+
+<p><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="609pt" height="105pt" viewBox="0.00 0.00 608.62 104.60" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 100.6)">
+<title>G</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-100.6 604.6245,-100.6 604.6245,4 -4,4"/>
+<text text-anchor="middle" x="300.3123" y="-8.2" font-family="Times,serif" font-size="14.00" fill="#000000">address</text>
+<!-- array -->
+<g id="node1" class="node">
+<title>array</title>
+<polygon fill="#d3d3d3" stroke="#000000" points="0,-25.3 0,-61.3 536.9988,-61.3 536.9988,-25.3 0,-25.3"/>
+<text text-anchor="middle" x="33.6606" y="-39.2" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff08</text>
+<polyline fill="none" stroke="#000000" points="67.3212,-25.5 67.3212,-61.3 "/>
+<text text-anchor="middle" x="100.5891" y="-39.2" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff0c</text>
+<polyline fill="none" stroke="#000000" points="133.857,-25.5 133.857,-61.3 "/>
+<text text-anchor="middle" x="167.5176" y="-39.2" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff10</text>
+<polyline fill="none" stroke="#000000" points="201.1782,-25.5 201.1782,-61.3 "/>
+<text text-anchor="middle" x="234.8388" y="-39.2" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff14</text>
+<polyline fill="none" stroke="#000000" points="268.4994,-25.5 268.4994,-61.3 "/>
+<text text-anchor="middle" x="302.16" y="-39.2" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff18</text>
+<polyline fill="none" stroke="#000000" points="335.8206,-25.5 335.8206,-61.3 "/>
+<text text-anchor="middle" x="369.0885" y="-39.2" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff1c</text>
+<polyline fill="none" stroke="#000000" points="402.3564,-25.5 402.3564,-61.3 "/>
+<text text-anchor="middle" x="436.017" y="-39.2" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff20</text>
+<polyline fill="none" stroke="#000000" points="469.6776,-25.5 469.6776,-61.3 "/>
+<text text-anchor="middle" x="503.3382" y="-39.2" font-family="Times,serif" font-size="14.00" fill="#000000">0x61ff24</text>
+</g>
+<!-- array&#45;&gt;array -->
+<g id="edge1" class="edge">
+<title>array:f6-&gt;array:f7</title>
+<path fill="none" stroke="#000000" d="M402.055,-47.054C304.0024,-59.8583 318.3661,-79.8 469.9994,-79.8 616.6175,-79.8 634.8961,-61.1557 547.3031,-48.347"/>
+<polygon fill="#000000" stroke="#000000" points="547.6915,-44.8675 537.3076,-46.9712 546.737,-51.8021 547.6915,-44.8675"/>
+<text text-anchor="middle" x="268.4994" y="-84" font-family="Times,serif" font-size="14.00" fill="#000000">+4</text>
+</g>
+</g>
+</svg>
+</p></section><section lineno="626" class="slide " data-line="626" data-h="42" data-v="0">
+<h2 class="mume-header" id="%E9%A1%8C%E7%9B%AE3">&#x984C;&#x76EE;3</h2>
+
+</section><section lineno="630" class="slide " data-line="630" data-h="43" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE3-%E6%95%98%E8%BF%B0">&#x984C;&#x76EE;3-&#x6558;&#x8FF0;</h3>
+
+<p>&#x7F8E;&#x7F8E;&#x662F;&#x4E00;&#x500B;&#x6587;&#x79D1;&#x751F;&#xFF0C;&#x5979;&#x70BA;&#x4E86;&#x88FD;&#x4F5C;&#x5831;&#x544A;&#xFF0C;&#x5FC5;&#x9808;&#x6536;&#x96C6;&#x4E00;&#x4E9B;&#x8CC7;&#x6599;&#x3002;&#x4F46;&#x7F8E;&#x7F8E;&#x5979;&#x5C0D;&#x7A0B;&#x5F0F;&#x4E0D;&#x662F;&#x5F88;&#x4E86;&#x89E3;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x4F60;&#x5E6B;&#x52A9;&#x5979;&#x5BEB;&#x597D;&#x4E00;&#x4E9B;&#x8655;&#x7406;&#x8CC7;&#x6599;&#x7684;&#x51FD;&#x5F0F;&#xFF0C;&#x8B93;&#x5979;&#x53EF;&#x4EE5;&#x900F;&#x904E;&#x90A3;&#x4E9B;&#x51FD;&#x5F0F;&#xFF0C;&#x7C21;&#x55AE;&#x7684;&#x5B8C;&#x6210;&#x5831;&#x544A;&#x3002;</p>
+</section><section lineno="636" class="slide " data-line="636" data-h="44" data-v="0">
+<h3 class="mume-header" id="%E7%BE%8E%E7%BE%8E%E9%9C%80%E8%A6%81%E7%9A%84%E5%87%BD%E5%BC%8F">&#x7F8E;&#x7F8E;&#x9700;&#x8981;&#x7684;&#x51FD;&#x5F0F;</h3>
+
+<pre data-role="codeBlock" data-info="c" class="language-c"><span class="token comment">//&#x8B80;&#x5165;size&#x500B;&#x503C;&#xFF0C;&#x4E26;&#x4F9D;&#x5E8F;&#x653E;&#x9032;&#x9663;&#x5217;</span>
+<span class="token keyword">void</span> <span class="token function">inputArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//&#x8F38;&#x51FA;&#x9663;&#x5217;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x500B;&#x6578;&#xFF0C;&#x6BCF;&#x500B;&#x6578;&#x4E4B;&#x9593;&#x7528;&#x7A7A;&#x767D;&#x9694;&#x958B;&#xFF0C;&#x7D50;&#x5C3E;&#x9700;&#x8981;&#x63DB;&#x884C;</span>
+<span class="token keyword">void</span> <span class="token function">outputArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//copy&#x9663;&#x5217;&#x4E26;&#x56DE;&#x50B3;</span>
+<span class="token keyword">int</span><span class="token operator">*</span> <span class="token function">copyArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//&#x6392;&#x5E8F;&#x9663;&#x5217;</span>
+<span class="token keyword">void</span> <span class="token function">sortArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//&#x56DE;&#x50B3;&#x627E;&#x5230;&#x4F4D;&#x7F6E;&#x7684;&#x6307;&#x6A19;&#xFF0C;&#x5982;&#x679C;&#x627E;&#x4E0D;&#x5230;&#x8ACB;&#x56DE;&#x50B3;NULL</span>
+<span class="token keyword">int</span><span class="token operator">*</span> <span class="token function">searchValueInArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> arrSize<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</pre></section><section lineno="657" class="slide " data-line="657" data-h="45" data-v="0">
+<h3 class="mume-header" id="%E7%BE%8E%E7%BE%8E%E7%9B%AE%E5%89%8D%E6%92%B0%E5%AF%AB%E7%9A%84%E7%A8%8B%E5%BC%8F%E7%A2%BC">&#x7F8E;&#x7F8E;&#x76EE;&#x524D;&#x64B0;&#x5BEB;&#x7684;&#x7A0B;&#x5F0F;&#x78BC;</h3>
+
+<pre data-role="codeBlock" data-info="c" class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> arr1<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">88</span><span class="token punctuation">,</span> <span class="token number">33</span><span class="token punctuation">,</span> <span class="token number">43</span><span class="token punctuation">,</span> <span class="token number">54</span><span class="token punctuation">,</span> <span class="token number">92</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> arr2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3423</span><span class="token punctuation">,</span> <span class="token number">453</span><span class="token punctuation">,</span> <span class="token number">3256</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">464</span><span class="token punctuation">,</span> <span class="token number">6537</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">,</span> <span class="token number">452</span><span class="token punctuation">,</span> <span class="token number">235</span><span class="token punctuation">,</span> <span class="token number">54</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> arr3<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">*</span>arr4<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> arr1Size <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">,</span> arr2Size <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">,</span> arr3Size <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span> arr4Size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token function">sortArray</span><span class="token punctuation">(</span>arr2<span class="token punctuation">,</span> arr2Size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">inputArray</span><span class="token punctuation">(</span>arr3<span class="token punctuation">,</span> arr3Size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span><span class="token function">searchValueInArray</span><span class="token punctuation">(</span>arr3<span class="token punctuation">,</span> arr3Size<span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+
+    arr4 <span class="token operator">=</span> <span class="token function">copyArray</span><span class="token punctuation">(</span>arr1<span class="token punctuation">,</span> arr1Size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    arr4Size <span class="token operator">=</span> arr1Size<span class="token punctuation">;</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span><span class="token function">searchValueInArray</span><span class="token punctuation">(</span>arr4<span class="token punctuation">,</span> arr3Size<span class="token punctuation">,</span> <span class="token number">88</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+
+    <span class="token function">outputArray</span><span class="token punctuation">(</span>arr1<span class="token punctuation">,</span> arr1Size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">outputArray</span><span class="token punctuation">(</span>arr3<span class="token punctuation">,</span> arr3Size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">outputArray</span><span class="token punctuation">(</span>arr4<span class="token punctuation">,</span> arr4Size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">system</span><span class="token punctuation">(</span><span class="token string">&quot;pause&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="682" class="slide " data-line="682" data-h="46" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE3-%E7%AF%84%E4%BE%8B%E8%BC%B8%E5%85%A5">&#x984C;&#x76EE;3-&#x7BC4;&#x4F8B;&#x8F38;&#x5165;</h3>
+
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>20 30 101 43 32
+</code></pre><h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE3-%E7%AF%84%E4%BE%8B%E8%BC%B8%E5%87%BA">&#x984C;&#x76EE;3-&#x7BC4;&#x4F8B;&#x8F38;&#x51FA;</h3>
+
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>&gt; 88 33 43 54 92 55
+&gt; 20 30 201 43 32
+&gt; 20 33 43 54 92 55
+</code></pre></section><section lineno="698" class="slide " data-line="698" data-h="47" data-v="0">
+<h2 class="mume-header" id="%E9%A1%8C%E7%9B%AE3-%E6%B8%AC%E8%B3%872-main">&#x984C;&#x76EE;3-&#x6E2C;&#x8CC7;2-main</h2>
+
+<pre data-role="codeBlock" data-info="c" class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> sen<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">65</span><span class="token punctuation">,</span> <span class="token number">72</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">&apos;p&apos;</span><span class="token punctuation">,</span> <span class="token number">121</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">116</span><span class="token punctuation">,</span> <span class="token number">105</span><span class="token punctuation">,</span> <span class="token number">114</span><span class="token punctuation">,</span> <span class="token number">66</span><span class="token punctuation">,</span> <span class="token number">104</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">97</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">33</span><span class="token punctuation">,</span> <span class="token number">94</span><span class="token punctuation">,</span> <span class="token number">118</span><span class="token punctuation">,</span> <span class="token number">94</span><span class="token punctuation">,</span> <span class="token number">382</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> size1 <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> <span class="token operator">*</span> exist <span class="token operator">=</span> <span class="token function">searchValueInArray</span><span class="token punctuation">(</span>sen<span class="token punctuation">,</span> size1<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>exist<span class="token punctuation">)</span> <span class="token operator">*</span>exist <span class="token operator">+=</span> <span class="token number">33</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span> notExist <span class="token operator">=</span> <span class="token function">searchValueInArray</span><span class="token punctuation">(</span>sen<span class="token punctuation">,</span> size1<span class="token punctuation">,</span> <span class="token number">1023</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>notExist<span class="token punctuation">)</span> <span class="token operator">*</span>notExist <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">21324</span><span class="token punctuation">;</span>
+
+    <span class="token function">inputArray</span><span class="token punctuation">(</span>sen <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">sortArray</span><span class="token punctuation">(</span>sen <span class="token operator">+</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> <span class="token operator">*</span>sen2<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> size2 <span class="token operator">=</span> size1 <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    sen2 <span class="token operator">=</span> <span class="token function">copyArray</span><span class="token punctuation">(</span>sen <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> size2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    exist <span class="token operator">=</span> <span class="token function">searchValueInArray</span><span class="token punctuation">(</span>sen2<span class="token punctuation">,</span> size2<span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>exist<span class="token punctuation">)</span> <span class="token operator">*</span>exist <span class="token operator">=</span> <span class="token number">121</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size2<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%c&quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>sen2 <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">system</span><span class="token punctuation">(</span><span class="token string">&quot;pause&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="728" class="slide " data-line="728" data-h="48" data-v="0">
+<h2 class="mume-header" id="%E9%A1%8C%E7%9B%AE3-%E6%B8%AC%E8%B3%872-%E8%BC%B8%E5%85%A5">&#x984C;&#x76EE;3-&#x6E2C;&#x8CC7;2-&#x8F38;&#x5165;</h2>
+
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>97 112
+</code></pre></section><section lineno="735" class="slide " data-line="735" data-h="49" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE3-%E7%A8%8B%E5%BC%8F%E7%A2%BC1">&#x984C;&#x76EE;3-&#x7A0B;&#x5F0F;&#x78BC;1</h3>
+
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">inputArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">&quot;%d&quot;</span><span class="token punctuation">,</span> arr <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">outputArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%d &quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span><span class="token operator">*</span> <span class="token function">copyArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>newArr <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token operator">*</span><span class="token punctuation">(</span>newArr <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> newArr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</pre></section><section lineno="764" class="slide " data-line="764" data-h="50" data-v="0">
+<h3 class="mume-header" id="%E9%A1%8C%E7%9B%AE3-%E7%A8%8B%E5%BC%8F%E7%A2%BC2">&#x984C;&#x76EE;3-&#x7A0B;&#x5F0F;&#x78BC;2</h3>
+
+<pre data-role="codeBlock" data-info="c = 1" class="language-c"><span class="token keyword">void</span> <span class="token function">sortArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">int</span> <span class="token operator">*</span>min <span class="token operator">=</span> arr <span class="token operator">+</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> j<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token operator">*</span>min<span class="token punctuation">)</span> min <span class="token operator">=</span> arr <span class="token operator">+</span> j<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">int</span> tmp <span class="token operator">=</span> <span class="token operator">*</span>min<span class="token punctuation">;</span>
+        <span class="token operator">*</span>min <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span><span class="token operator">*</span> <span class="token function">searchValueInArray</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> arrSize<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arrSize<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> i<span class="token punctuation">)</span> <span class="token operator">==</span> value<span class="token punctuation">)</span> <span class="token keyword">return</span> arr <span class="token operator">+</span> i<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="788" class="slide " data-line="788" data-h="51" data-v="0">
+<p>&#x7F8E;&#x7F8E;&#x770B;&#x5230;&#x4F60;&#x7684;&#x7A0B;&#x5F0F;&#xFF0C;&#x89BA;&#x5F97;&#x975E;&#x5E38;&#x6EFF;&#x610F;&#xFF0C;&#x76F8;&#x4FE1;&#x5269;&#x4E0B;&#x7684;&#x90E8;&#x5206;&#x5979;&#x53EF;&#x4EE5;&#x7368;&#x81EA;&#x5B8C;&#x6210;&#x7684;~<br>
+&#x4E5F;&#x5E0C;&#x671B;&#x4E0B;&#x6B21;&#x80FD;&#x7E7C;&#x7E8C;&#x5408;&#x4F5C;</p>
+</section><section lineno="792" class="slide " data-line="792" data-h="52" data-v="0">
+<h3 class="mume-header" id="array%E8%88%87pointer%E4%B8%8D%E4%B8%80%E6%A8%A3%E7%9A%84%E7%89%B9%E6%80%A7">array&#x8207;pointer&#x4E0D;&#x4E00;&#x6A23;&#x7684;&#x7279;&#x6027;</h3>
+
+<pre data-role="codeBlock" data-info="c" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">111</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>ptr<span class="token punctuation">;</span>
+
+    ptr <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// &#x9019;&#x662F;&#x5408;&#x6CD5;</span>
+    
+    <span class="token keyword">int</span> arr2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// &#x9019;&#x662F;&#x4E0D;&#x5408;&#x6CD5;</span>
+    arr <span class="token operator">=</span> ptr<span class="token punctuation">;</span> <span class="token comment">// &#x9019;&#x662F;&#x4E0D;&#x5408;&#x6CD5;</span>
+<span class="token punctuation">}</span>
+</pre></section><section lineno="809" class="slide " data-line="809" data-h="53" data-v="0">
+<h3 class="mume-header" id="array%E8%88%87pointer%E4%B8%8D%E4%B8%80%E6%A8%A3%E7%9A%84%E7%89%B9%E6%80%A72">array&#x8207;pointer&#x4E0D;&#x4E00;&#x6A23;&#x7684;&#x7279;&#x6027;2</h3>
+
+<pre data-role="codeBlock" data-info="c" class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>ptr <span class="token operator">=</span> arr<span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;sizeof(array): %d\n&quot;</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;sizeof(pointer): %d\n&quot;</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>ptr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</pre></section><section lineno="824" class="slide " data-line="824" data-h="54" data-v="0">
+<pre data-role="codeBlock" data-info="text" class="language-text"><code>&gt; sizeof(array): 40
+&gt; sizeof(pointer): 4
+</code></pre></section>
+      </div>
+    </div>
+    
+      </div>
+      
+      
+    
+    
+      <script>
+        Reveal.initialize({"margin":0.1,"dependencies":[]})
+      </script>
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
