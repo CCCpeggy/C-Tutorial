@@ -1,4 +1,5 @@
 <!-- slide -->
+
 # pointer
 
 <!-- slide -->
@@ -469,6 +470,356 @@ int main(){
 ``` text
 > max: 55, min: 0
 ```
+
+<!-- slide -->
+### 題目2-圖解
+
+min = 2147483647
+max = -2147483648
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min = 3
+max = 3
+i = 0
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min = 3
+max = 15
+i = 1
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+
+<!-- slide -->
+min = 3
+max = 15
+i = 2
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+
+<!-- slide -->
+min = 0
+max = 15
+i = 3
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min = 0
+max = 44
+i = 4
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+
+<!-- slide -->
+min = 0
+max = 55
+i = 5
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min = 0
+max = 55
+i = 6
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min_index = 0
+min = 3
+i = 0
+j = 1
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min_index = 0
+min = 3
+i = 0
+j = 2
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min_index = 3
+min = 0
+i = 0
+j = 3
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min_index = 3
+min = 0
+i = 0
+j = 4
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min_index = 3
+min = 0
+i = 0
+j = 5
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min_index = 3
+min = 0
+i = 0
+j = 6
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 3 |<f1> 15 |<f2> 9 |<f3> 0 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min_index = 3
+min = 0
+i = 0
+j = 6
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 0 |<f1> 15 |<f2> 9 |<f3> 3 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min_index = 1
+min = 15
+i = 1
+j = 2
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 0 |<f1> 15 |<f2> 9 |<f3> 3 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+min_index = 1
+min = 15
+i = 1
+j = 3
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 0 |<f1> 15 |<f2> 9 |<f3> 3 |<f4> 44 |<f5> 55 |<f6> 31}",shape=record, style=filled];
+}
+```
+
+
+<!-- slide -->
+min_index = 3
+min = 3
+i = 1
+
+``` dot
+digraph G {
+    rankdir=LR;
+    color=lightgray;
+    array [label="{<f0> 0 |<f1> 3 |<f2> 9 |<f3> 15 |<f4> 31 |<f5> 44 |<f6> 55}",shape=record, style=filled];
+}
+```
+
+<!-- slide -->
+
+``` dot
+digraph G {
+    rankdir=LR;
+
+    subgraph cluster0 {
+        node [style=filled, shape=box];
+        color=white;
+        a [label = "XXXXX"];
+        label = "main: max";
+    }
+
+    subgraph cluster1 {
+        node [style=filled, shape=box];
+        color=white;
+        b [label = "XXXXX"];
+        label = "main: min";
+    }
+
+}
+```
+
+
+<!-- slide -->
+
+``` dot
+digraph G {
+    rankdir=LR;
+
+      subgraph cluster0 {
+        node [style=filled, shape=box];
+        color=white;
+        a [label = "2147483647"];
+        label = "main: max";
+    }
+
+    subgraph cluster1 {
+        node [style=filled, shape=box];
+        color=white;
+        b [label = "-2147483648"];
+        label = "main: min";
+    }
+
+    subgraph cluster2 {
+        node [style=filled, shape=box];
+        color=white;
+        b2 [label = "main: min"];
+        label = "find:min";
+    }
+
+    subgraph cluster3 {
+        node [style=filled, shape=box];
+        color=white;
+        a2 [label = "main: max"];
+        label = "find:max";
+    }
+    a2->a;
+    b2->b;
+}
+```
+
+
+
+
+<!-- slide -->
+
+``` dot
+digraph G {
+    rankdir=LR;
+
+      subgraph cluster0 {
+        node [style=filled, shape=box];
+        color=white;
+        a [label = "XXXX"];
+        label = "main: max";
+    }
+
+    subgraph cluster1 {
+        node [style=filled, shape=box];
+        color=white;
+        b [label = "XXXX"];
+        label = "main: min";
+    }
+
+    subgraph cluster2 {
+        node [style=filled, shape=box];
+        color=white;
+        b2 [label = "2147483647"];
+        label = "find:min";
+    }
+
+    subgraph cluster3 {
+        node [style=filled, shape=box];
+        color=white;
+        a2 [label = "-2147483648"];
+        label = "find:max";
+    }
+}
+```
+
 
 <!-- slide -->
 ### 題目2-程式碼1
