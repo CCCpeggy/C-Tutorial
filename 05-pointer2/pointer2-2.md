@@ -211,7 +211,31 @@ int **ptr;
 
 ## 之前的問題
 
+<!-- slide -->
+``` C
+#include <stdio.h>
+#include <stdlib.h>
 
+void Reverse2D(int (*array)[2], int m)
+{
+    for(int i = m - 1; i >= 0; i--){
+        int rowSize = sizeof(array[i]) / sizeof(int);
+        for(int j = rowSize - 1; j >= 0; j--)
+        {
+            printf("%d ", array[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+    int m = 3;
+    int array[][2]={{1, 2}, {3, 4}, {5, 6}};
+    Reverse2D(array, m);
+    return 0;
+}
+```
 
 <!-- slide -->
 *ptr++
