@@ -180,11 +180,11 @@ int **ptr;
 ```
 
 ```ditaa {cmd=true args=["-E"]}
-+------+
-| 0x10 |
-+---+--+
-    |
-
+    +------+
+ptr | 0x00 |
+    ++--+--+
+     |
+     v
 +------+------+------+------+
 | 0x10 | 0x7c | 0x50 | 0x88 |
 +------+------+------+------+
@@ -213,9 +213,17 @@ int **ptr;
 
 <!-- slide -->
 ``` C
-#include <stdio.h>
-#include <stdlib.h>
+int main()
+{
+    int m = 3;
+    int array[][2]={{1, 2}, {3, 4}, {5, 6}};
+    Reverse2D(array, m);
+    return 0;
+}
+```
 
+<!-- slide -->
+``` C
 void Reverse2D(int (*array)[2], int m)
 {
     for(int i = m - 1; i >= 0; i--){
@@ -227,35 +235,34 @@ void Reverse2D(int (*array)[2], int m)
         printf("\n");
     }
 }
+```
 
-int main()
+<!-- slide -->
+``` C
+void Reverse2D(int (*array)[2], int m)
 {
-    int m = 3;
-    int array[][2]={{1, 2}, {3, 4}, {5, 6}};
-    Reverse2D(array, m);
-    return 0;
+    for(int i = m - 1; i >= 0; i--){
+        int rowSize = sizeof(*(array + i)) / sizeof(int);
+        for(int j = rowSize - 1; j >= 0; j--)
+        {
+            printf("%d ", *(*(array + i) + j));
+        }
+        printf("\n");
+    }
 }
 ```
 
 <!-- slide -->
-*ptr++
-二維
-雙重指標
-size
-function pointer
-之前的題目
-for(ptr+i to ptr + j)
-<!-- slide -->
-int a; // 一個整型數
-int *a; // 一個指向整數的指標
-int **a; // 一個指向指標的指標，它指向的指標是指向一個整型數
-int a[10]; // 一個有10個整數型的陣列
-int *a[10]; // 一個有10個指標的陣列，該指標是指向一個整數型的
-int (*a)[10]; // 一個指向有10個整數型陣列的指標
-int (*a)(int); // 一個指向函數的指標，該函數有一個整數型參數並返回一個整數
-int (*a[10])(int); // 一個有10個指標的陣列，該指標指向一個函數，該函數有一個整數型參數並返回一個整數
-
-malloc和其他的
-
-陣列的sum跟avg
-
+``` C
+void Reverse2D(int (*array)[2], int m)
+{
+    for(int (*ptr)[2] = array + m - 1; ptr >= array; ptr--){
+        int rowSize = sizeof(*(ptr)) / sizeof(int);
+        for(int* ptr2 = *(ptr) + rowSize - 1; ptr2 >= *(ptr); ptr2--)
+        {
+            printf("%d ", *(ptr2));
+        }
+        printf("\n");
+    }
+}
+```
