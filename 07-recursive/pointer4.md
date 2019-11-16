@@ -1,9 +1,18 @@
 # pointer 題目練習
 
 <!-- slide -->
-## 題目1
+## 題目
 
 政府對台灣各國中進行幾個項目的評測，其中包含整潔、讀書風氣、課外活動、教師、幸福度，並希望依加權後的成果進行排名並列出。
+
+<!-- slide -->
+因為記錄的資料是不會變的，所以關於score的型態都會是const的
+
+<!-- slide -->
+## 思路
+
+1. copy一份array
+2. 用指標陣列儲存指向每一層array
 
 <!-- slide -->
 ## 框架
@@ -551,6 +560,6 @@ void printSort(const int score[][col], const int weight[col], int size){
 }
 ```
 
-<!-- slide -->
+<!-- slide -->\
 
 <!-- slide -->
