@@ -415,6 +415,311 @@ digraph f{
 ```
 
 <!-- slide -->
+## 遞迴的缺點
+
+<!-- slide -->
+### 跑跑看以下程式
+
+``` C
+int f(int n){
+    if (n <= 1) return 1;
+    return f(n - 1) + f(n - 2);
+}
+int main(){
+    printf("f(42) = %d", f(42));
+}
+```
+
+<!-- slide -->
+### f(4)的圖
+
+``` dot
+digraph f{
+    a [label="f(4)"];
+    b1 [label="f(3)"];
+    b2 [label="f(2)"];
+    c1 [label="f(2)"];
+    c2 [label="f(1)"];
+    c3 [label="f(1)"];
+    c4 [label="f(0)"];
+    d1 [label="f(1)"];
+    d2 [label="f(0)"];
+    a->{b1 b2};
+    b1->{c1 c2};
+    b2->{c3 c4};
+    c1->{d1 d2};
+}
+```
+<!-- slide -->
+### f(5)的圖
+
+``` dot
+digraph f{
+    a [label="f(5)"];
+    b1 [label="f(4)"];
+    b2 [label="f(3)"];
+    c1 [label="f(3)"];
+    c2 [label="f(2)"];
+    c3 [label="f(2)"];
+    c4 [label="f(1)"];
+    d1 [label="f(2)"];
+    d2 [label="f(1)"];
+    d3 [label="f(1)"];
+    d4 [label="f(0)"];
+    d5 [label="f(1)"];
+    d6 [label="f(0)"];
+    e1 [label="f(1)"];
+    e2 [label="f(0)"];
+    a ->{b1 b2};
+    b1->{c1 c2};
+    b2->{c3 c4};
+    c1->{d1 d2};
+    c2->{d3 d4};
+    c3->{d5 d6};
+    d1->{e1 e2};
+}
+```
+
+<!-- slide -->
+### 缺點
+
+* 效率差
+* 佔記憶體
+
+<!-- slide -->
+## 題目1
+
+<!-- slide -->
+$f(n) = \displaystyle\sum_{i=1}^n 5i + 3$
+
+請寫一個function，傳入n後，回傳結果
+
+<!-- slide -->
+### 題目1 - 輸入
+
+無
+
+### 題目1 - 輸出
+
+``` text
+> f(5) = 90
+> f(10) = 305
+```
+
+<!-- slide -->
+### 題目1 - 框架
+
+``` C
+#include<stdio.h>
+
+int f(int n){
+}
+
+int main(){
+  printf("f(5) = %d\n", f(5));
+  printf("f(10) = %d\n", f(10));
+}
+```
+
+<!-- slide -->
+### 題目1 - 圖解
+
+``` dot
+digraph f{
+    "f(5)";
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    a5 [label = "5 * 5 + 3", shape = box];
+    "f(5)" -> {"f(4)", a5};
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    a5 [label = "5 * 5 + 3", shape = box];
+    a4 [label = "5 * 4 + 3", shape = box];
+    "f(5)" -> {"f(4)", a5};
+    "f(4)" -> {"f(3)", a4};
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    a5 [label = "5 * 5 + 3", shape = box];
+    a4 [label = "5 * 4 + 3", shape = box];
+    a3 [label = "5 * 3 + 3", shape = box];
+    "f(5)" -> {"f(4)", a5};
+    "f(4)" -> {"f(3)", a4};
+    "f(3)" -> {"f(2)", a3};
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    a5 [label = "5 * 5 + 3", shape = box];
+    a4 [label = "5 * 4 + 3", shape = box];
+    a3 [label = "5 * 3 + 3", shape = box];
+    a2 [label = "5 * 2 + 3", shape = box];
+    "f(5)" -> {"f(4)", a5};
+    "f(4)" -> {"f(3)", a4};
+    "f(3)" -> {"f(2)", a3};
+    "f(2)" -> {"f(1)", a2};
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    a5 [label = "5 * 5 + 3", shape = box];
+    a4 [label = "5 * 4 + 3", shape = box];
+    a3 [label = "5 * 3 + 3", shape = box];
+    a2 [label = "5 * 2 + 3", shape = box];
+    a1 [label = "5 * 1 + 3", shape = box];
+    "f(5)" -> {"f(4)", a5};
+    "f(4)" -> {"f(3)", a4};
+    "f(3)" -> {"f(2)", a3};
+    "f(2)" -> {"f(1)", a2};
+    "f(1)" -> {a1};
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    a5 [label = "5 * 5 + 3", shape = box];
+    a4 [label = "5 * 4 + 3", shape = box];
+    a3 [label = "5 * 3 + 3", shape = box];
+    a2 [label = "5 * 2 + 3", shape = box];
+    "f(5)" -> {"f(4)", a5};
+    "f(4)" -> {"f(3)", a4};
+    "f(3)" -> {"f(2)", a3};
+    "f(2)" -> {"8", a2};
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    a5 [label = "5 * 5 + 3", shape = box];
+    a4 [label = "5 * 4 + 3", shape = box];
+    a3 [label = "5 * 3 + 3", shape = box];
+    "f(5)" -> {"f(4)", a5};
+    "f(4)" -> {"f(3)", a4};
+    "f(3)" -> {"21", a3};
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    a5 [label = "5 * 5 + 3", shape = box];
+    a4 [label = "5 * 4 + 3", shape = box];
+    "f(5)" -> {"f(4)", a5};
+    "f(4)" -> {"39", a4};
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    a5 [label = "5 * 5 + 3", shape = box];
+    "f(5)" -> {"62", a5};
+}
+```
+
+<!-- slide -->
+``` dot
+digraph f{
+    "90"
+}
+```
+
+<!-- slide -->
+### 題目1 - 程式碼
+
+``` C
+#include<stdio.h>
+
+int f(int n){
+  int value = 5 * n + 3;
+  if(n > 1) value += f(n - 1);
+  return value;
+}
+
+int main(){
+  printf("f(5) = %d\n", f(5));
+  printf("f(10) = %d\n", f(10));
+}
+```
+
+<!-- slide -->
+## 題目2
+
+<!-- slide -->
+$a_1 = 1$
+$a_2 = 2$
+$a_n = a_{n-1} * a_{n-2} + 1$
+$9 \ge n \ge 1$
+
+請寫一個function，傳入$n$後，回傳$a_n$的值
+
+<!-- slide -->
+### 題目2 - 輸入
+
+無
+
+### 題目2 - 輸出
+
+``` text
+a(1) = 1
+a(2) = 2
+a(3) = 3
+a(4) = 7
+a(5) = 22
+```
+
+<!-- slide -->
+### 題目2 - 框架
+
+``` C
+#include<stdio.h>
+
+int a(int n){
+}
+
+int main(){
+  for(int i = 1; i <= 5; i++){
+    printf("a(%d) = %d\n", i, a(i));
+  }
+}
+```
+
+<!-- slide -->
+### 題目2 - 程式碼
+
+``` C
+#include<stdio.h>
+
+int a(int n){
+  if(n <= 2) return n;
+  return a(n - 1) * a(n - 2) + 1;
+}
+
+int main(){
+  for(int i = 1; i <= 5; i++){
+    printf("a(%d) = %d\n", i, a(i));
+  }
+}
+```
+
+<!-- slide -->
 ## 題目3
 
 找出陣列中最大的矩形
