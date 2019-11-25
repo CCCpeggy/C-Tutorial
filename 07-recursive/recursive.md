@@ -12,8 +12,13 @@
 * 解決當下的問題
 * 停止的時機
 
+$a_n = a_{n-1} + 1$
+$a_1 = 1$
+
 <!-- slide -->
 ## 舉例 - 費氏數列
+
+$f_n = f_{n-1} + f_{n-2}$
 
 ``` C
 int f(int n){
@@ -226,7 +231,7 @@ int f(int n){
 ``` dot
 digraph f{
     a [label="f(4)"];
-    b1 [label="f(3)", fillcolor=yellow, style=filled];
+    b1 [label="3", fillcolor=yellow, style=filled];
     b2 [label="f(2)"];
     c1 [label="2", style=dashed];
     c2 [label="1", style=dashed];
@@ -490,7 +495,9 @@ digraph f{
 ## 題目1
 
 <!-- slide -->
-$f(n) = \displaystyle\sum_{i=1}^n 5i + 3$
+$f(n) = \displaystyle\sum_{i=1}^n (5i + 3)$
+
+$f(n) = \displaystyle\sum_{i=1}^n 5i + 3 = (\displaystyle\sum_{i=1}^{n - 1} (5i + 3)) + 5n + 3$
 
 請寫一個function，傳入n後，回傳結果
 
@@ -734,6 +741,16 @@ int main(){
 ``` test
 > 12
 ```
+
+<!-- slide -->
+### 題目3 - 思考
+
+1. right、left、up、down的range合不合理
+   1. left < right
+   2. up < down
+2. right left up down圍出來的是否為矩形
+3. 切小塊的矩陣找
+   1. 上下左右的找
 
 <!-- slide -->
 ### 題目3 - 框架
@@ -1434,4 +1451,96 @@ int main(){
 ```
 
 <!-- slide -->
-GCD
+## 題目4
+
+請利用框架撰寫一個function，給入一串數字陣列，輸出所有排列組合（只要列出所有組合即可，不用照順序﹚
+
+<!-- slide -->
+### 題目4 - 輸入
+
+``` text
+```
+
+### 題目4 - 輸出
+
+``` text
+1 2 3 
+1 3 2
+2 1 3
+2 3 1
+3 1 2
+3 2 1
+```
+
+<!-- slide -->
+### 題目4 - 框架
+
+``` C
+#include<stdio.h>
+
+void f(int * arr, int size, int i){
+}
+
+int main(){
+  int arr[] = {1, 2, 3};
+  f(arr, 3, 0);
+}
+```
+
+<!-- slide -->
+## 題目4 - 圖解
+
+<!-- slide -->
+
+``` dot
+digraph f{
+     node[shape=record];
+     n1 [label="{{_1|_2|_3}}"];
+     n2 [label="{{1|_2|_3}}"];
+     n3 [label="{{2|_1|_3}}"];
+     n4 [label="{{3|_2|_1}}"];
+     n5 [label="{{1|2|_3}}"];
+     n6 [label="{{1|3|_2}}"];
+     n7 [label="{{2|1|_3}}"];
+     n8 [label="{{2|3|_1}}"];
+     n9 [label="{{3|1|_2}}"];
+     n10 [label="{{3|2|_1}}"];
+     n1 -> {n2, n3, n4};
+     n2 -> {n5, n6};
+     n3 -> {n7, n8};
+     n4 -> {n9, n10};
+}
+```
+
+
+<!-- slide -->
+### 題目4 - 程式碼
+
+``` C
+#include<stdio.h>
+#include<stdlib.h>
+
+void f(int * arr, int size, int i){
+  if(i+1==size){
+    for(int j = 0; j < size; j++) printf("%d ", arr[j]);
+    printf("\n");
+    return ;
+  }
+  int *copyArr = (int*) malloc(size * sizeof(size));
+  for(int j = 0; j < size; j++) copyArr[j] = arr[j];
+  int num = arr[i];
+  for(int j = i; j < size; j++){
+    int tmp = arr[j];
+    arr[i] = tmp;
+    arr[j] = num;
+    f(arr, size, i + 1);
+    arr[i] = num;
+    arr[j] = tmp;
+  }
+}
+
+int main(){
+  int arr[] = {1, 2, 3};
+  f(arr, 3, 0);
+}
+```
