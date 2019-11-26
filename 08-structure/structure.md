@@ -263,10 +263,322 @@ int main(){
 EN: 84, CN: 93, PE: 86, SS: 82, HIST: 75
 ```
 <!-- slide -->
-### 題目2 - 圖解
+### 題目2 - 程式碼
+
+``` C
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Student{
+    int en;
+    int cn;
+    int pe;
+    int ss;
+    int hist;
+};
+int main(){
+  int n;
+  scanf("%d", &n);
+  struct Student st, maxSt;
+  int maxSum = 0;
+  for(int i = 0; i < n; i++){
+    scanf("%d%d%d%d%d", &st.en, &st.cn, &st.pe, &st.ss, &st.hist);
+    int sum = st.en + st.cn + st.pe + st.ss + st.hist;
+    if(sum > maxSum){
+      maxSt = st;
+      maxSum = sum;
+    }
+  }
+  printf("EN: %d, CN: %d, PE: %d, SS: %d, HIST: %d\n", maxSt.en, maxSt.cn, maxSt.pe, maxSt.ss, maxSt.hist);
+}
+```
 
 <!-- slide -->
-### 題目2 - 程式碼
+## 直接宣告
+
+``` C
+struct Apple{
+    char color[10];
+    int size;
+    int weight;
+    int price;
+} apple;
+```
+
+<!-- slide -->
+## typedef
+
+將資料型別取別名
+
+<!-- slide -->
+### typedef - 例子1
+
+``` C
+typedef int* intPtr;
+intPtr ptr;
+```
+
+相當於
+
+``` C
+int* ptr;
+```
+
+<!-- slide -->
+### typedef - 應用在structure
+
+``` C
+struct Apple{
+    char *color;
+    int size;
+    int weight;
+    int price;
+};
+typedef struct Apple Apple
+```
+
+<!-- slide -->
+``` C
+typedef struct Apple{
+    char *color;
+    int size;
+    int weight;
+    int price;
+} Apple;
+```
+
+<!-- slide -->
+## structure指標
+
+<!-- slide -->
+## structure function
+
+<!-- slide -->
+## nested structure
+
+<!-- slide -->
+## 應用 CRUD
+
+<!-- slide -->
+## union
+
+<!-- slide -->
+``` C
+struct Data{
+  int numInt;
+  double numDouble;
+  float numFloat;
+  long long numLongLong;
+};
+```
+
+```ditaa {cmd=true args=["-E"]}
+  numInt   numDouble   numFloat  numLongLong
++-------+--------------+-------+-------------+
+|       |              |       |             |
++-------+--------------+-------+-------------+
+```
+
+<!-- slide -->
+``` C
+union Data{
+  int numInt;
+  double numDouble;
+  float numFloat;
+  long long numLongLong;
+};
+```
+
+```ditaa {cmd=true args=["-E"]}
+  numInt
+  numDouble
+  numFloat
+  numLongLong
++--------------+
+|              |
++--------------+
+```
+
+<!-- slide -->
+``` C
+#include <stdio.h>
+#include <stdlib.h>
+
+union Data{
+  int numInt;
+  double numDouble;
+  float numFloat;
+  long long numLongLong;
+};
+
+int main(){
+  union Data d;
+  d.numInt = 10;
+  printf("when d.numInt = %d\n", d.numInt);
+  printf("int: %d\n", d.numInt);
+  printf("double: %lf\n", d.numDouble);
+  printf("float: %f\n", d.numFloat);
+  printf("long long: %lld\n\n", d.numLongLong);
+  d.numDouble = 10;
+  printf("when d.numDouble = %.0lf\n", d.numDouble);
+  printf("int: %d\n", d.numInt);
+  printf("double: %lf\n", d.numDouble);
+  printf("float: %f\n", d.numFloat);
+  printf("long long: %lld\n\n", d.numLongLong);
+  d.numFloat = 10;
+  printf("when d.numFloat = %.0f\n", d.numFloat);
+  printf("int: %d\n", d.numInt);
+  printf("double: %lf\n", d.numDouble);
+  printf("float: %f\n", d.numFloat);
+  printf("long long: %lld\n\n", d.numLongLong);
+  d.numLongLong = 10;
+  printf("when d.numLongLong = %lld\n", d.numLongLong);
+  printf("int: %d\n", d.numInt);
+  printf("double: %lf\n", d.numDouble);
+  printf("float: %f\n", d.numFloat);
+  printf("long long: %lld\n\n", d.numLongLong);
+}
+```
+
+<!-- slide -->
+### union使用目的
+
+* 節省空間
+
+<!-- slide -->
+## 題目4
+
+撰寫一個陣列儲存資料，且每一格的資料型態不一樣，可能為int, long long, char, short, double, float，最後將儲存的資料以輸入相反的順序輸出
+
+<!-- slide -->
+### 題目4 - 輸入
+
+``` text
+4
+doube
+100000.10
+float
+8.9
+int
+30
+char
+c
+```
+
+### 題目4 - 輸出
+
+``` text
+c
+30
+8.900000
+100000.100000
+```
+
+<!-- slide -->
+### 題目4 - 框架
+
+``` C
+#include <stdio.h>
+#include <stdlib.h>
+
+#define INT_TYPE 0
+#define DOUBLE_TYPE 1
+#define FLOAT_TYPE 2
+#define LONGLONG_TYPE 3
+#define CHAR_TYPE 4
+
+int main(){
+
+}
+```
+
+<!-- slide -->
+### 題目4 - 程式碼
+
+``` C
+#include <stdio.h>
+#include <stdlib.h>
+#define INT_TYPE 0
+#define DOUBLE_TYPE 1
+#define FLOAT_TYPE 2
+#define LONGLONG_TYPE 3
+#define CHAR_TYPE 4
+
+union Data{
+  int _int;
+  double _double;
+  float _float;
+  long long _llong;
+  char _char;
+};
+
+typedef struct SData{
+  union Data data;
+  int type;
+} SData;
+
+int main(){
+  int n;
+  scanf("%d", &n);
+  SData *d = (SData*) malloc(sizeof(SData) * n);
+  for(int i = 0; i < n; i++){
+    char type[10];
+    scanf("%s\n", type);
+    if(type[0] == 'i'){
+      d[i].type = INT_TYPE;
+      scanf("%d", &d[i].data._int);
+    }
+    else if(type[0] == 'd'){
+      d[i].type = DOUBLE_TYPE;
+      scanf("%lf", &d[i].data._double);
+    }
+    else if(type[0] == 'f'){
+      d[i].type = FLOAT_TYPE;
+      scanf("%f", &d[i].data._float);
+    }
+    else if(type[0] == 'l'){
+      d[i].type = LONGLONG_TYPE;
+      scanf("%lld", &d[i].data._llong);
+    }
+    else if(type[0] == 'c'){
+      d[i].type = CHAR_TYPE;
+      scanf("%c", &d[i].data._char);
+    }
+  }
+  for(int i = n - 1; i >= 0; i--){
+    switch(d[i].type){
+      case INT_TYPE:
+        printf("%d\n", d[i].data._int);
+        break;
+      case DOUBLE_TYPE:
+        printf("%lf\n", d[i].data._double);
+        break;
+      case FLOAT_TYPE:
+        printf("%f\n", d[i].data._float);
+        break;
+      case LONGLONG_TYPE:
+        printf("%lld\n", d[i].data._llong);
+        break;
+      case CHAR_TYPE:
+        printf("%c\n", d[i].data._char);
+        break;
+    }
+  }
+}
+```
+
+<!-- slide -->
+## enum
+
+### enum
+
+<!-- slide -->
+## 題目5
+
+請將題目4的type的部分改用enum實作
+
+<!-- slide -->
+### 題目5 - 程式碼
 
 ``` C
 ```
