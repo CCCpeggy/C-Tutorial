@@ -29,8 +29,12 @@ struct Apple{
 ```
 
 <!-- slide -->
-如果今天有一顆新蘋果，
-其中它的顏色是red，大小：10，重量：20，價格：50
+如果今天有一顆新蘋果
+而它的資訊如下
+* 顏色：red
+* 大小：10
+* 重量：20
+* 價格：50
 
 ``` C
 struct Apple apple1{"red", 10, 20, 50};
@@ -56,13 +60,17 @@ printf("apple1 price: %d\n", apple1.price);
 ```
 
 <!-- slide -->
-如果這顆蘋果一直賣不出去，賣家只好降價改賣30元
+如果這顆蘋果一直賣不出去
+賣家只好降價改賣30元
+
+``` C
+apple1.price = 30;
+```
 
 <!-- slide -->
 ### 例子 - 程式碼2
 
 ``` C
-apple1.price = 30;
 printf("apple1 color: %s\n", apple1.color);
 printf("apple1 size: %d\n", apple1.size);
 printf("apple1 weight: %d\n", apple1.weight);
@@ -230,7 +238,7 @@ int main(){
   for(int i = 0; i < n; i++){
     scanf("%s%d%d%d", apples[i].color, &apples[i].size, &apples[i].weight, &apples[i].price);
   }
-  while(true){
+  while(1)){
     int i;
     scanf("%d", &i);
     if(i < n && i >= 0)
@@ -244,7 +252,7 @@ int main(){
 <!-- slide -->
 ## 題目2
 
-請設計一個儲存學生期中成績的structure，期中包含英文(EN)、國文(CN)、體育(PE)、社會(SS)、物理(HIST)成績，並將成績最高的學生成績印出
+請設計一個儲存學生期中成績的structure，其中包含英文(EN)、國文(CN)、體育(PE)、社會(SS)、物理(HIST)成績，並將成績最高的學生成績印出
 (此題沒有框架)
 
 <!-- slide -->
@@ -617,7 +625,7 @@ int main() {
 }
 ```
 
-<!-- slide
+<!-- slid
 ### 題目3 - 圖解 -->
 
 <!-- slide -->
@@ -788,6 +796,8 @@ int main() {
 ## union
 
 <!-- slide -->
+### 如果一個資料用structure時
+
 ``` C
 struct Data{
   int numInt;
@@ -805,6 +815,8 @@ struct Data{
 ```
 
 <!-- slide -->
+### 如果改為union表示時
+
 ``` C
 union Data{
   int numInt;
@@ -825,6 +837,8 @@ union Data{
 ```
 
 <!-- slide -->
+### size的差別 - 程式碼
+
 ``` C
 union UData{
   int numInt;
@@ -844,7 +858,8 @@ int main(){
 }
 ```
 
-output
+<!-- slide -->
+### size的差別 - output
 
 ``` text
 
@@ -853,6 +868,8 @@ output
 ```
 
 <!-- slide -->
+### union的程式範例
+
 ``` C
 #include <stdio.h>
 #include <stdlib.h>
