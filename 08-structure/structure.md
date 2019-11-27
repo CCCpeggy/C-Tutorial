@@ -350,14 +350,439 @@ typedef struct Apple{
 <!-- slide -->
 ## structure指標
 
+``` C
+typedef struct Apple{
+    char *color;
+    int size;
+    int weight;
+    int price;
+} Apple;
+int main(){
+  struct Apple apple = {"red", 10, 20, 30};
+  struct Apple *applePtr = &apple;
+}
+```
+
 <!-- slide -->
-## structure function
+``` C
+printf("size: %d\n", (*applePtr).size );
+```
+
+<!-- slide -->
+``` C
+printf("size: %d\n", applePtr->size );
+```
 
 <!-- slide -->
 ## nested structure
 
+``` C
+struct St{
+    int id;
+    char name[10];
+};
+
+struct Class{
+    struct St st[10];
+};
+```
+
 <!-- slide -->
-## 應用 CRUD
+
+``` C
+struct St{
+    int id;
+    char name[10];
+};
+
+struct Class{
+    struct St st[10];
+};
+
+int main(){
+  struct Class class;
+  class.st[0].id = 1;
+}
+```
+
+<!-- slide -->
+## 題目3
+
+程式國小想要做一個學生資訊系統
+請你幫他整理資訊
+
+<!-- slide -->
+他們所提出的需求如下：
+
+* 需要有儲存學生的類別
+  * 座號
+  * 108年期末成績
+  * 請假幾次
+* 需要有儲存班級的類別
+  * 班上所有的學生
+  * 年級
+  * 班別
+
+<!-- slide -->
+他們所提出的功能如下：
+
+* 輸出全校的學生名單(command 1)
+* 輸出各班的前三名(command 2)
+* 輸出全校的前三名(command 3)
+* 依班級再依成績輸出全班的名單(command 4)
+* 輸出全校全勤名單(command 5)
+* 輸出全校平均(command 6)
+
+<!-- slide -->
+### 題目3 - 輸入
+
+``` text
+5
+
+4 1 1
+1 90 3
+2 59 0
+3 70 2
+4 60 1
+
+3 1 2
+1 90 3
+2 89 0
+4 40 1
+
+4 2 1
+1 40 3
+2 79 2
+3 80 3
+5 40 0
+
+2 2 2
+1 30 0
+3 40 1
+
+3 2 3
+2 70 1
+3 29 1
+4 80 0
+1
+2
+3
+4
+5
+6
+```
+
+<!-- slide -->
+### 題目3 - 輸出
+
+``` text
+1-1
+id: 1, score: 90, leave: 3
+id: 2, score: 59, leave: 0
+id: 3, score: 70, leave: 2
+id: 4, score: 60, leave: 1
+
+1-2
+id: 1, score: 90, leave: 3
+id: 2, score: 89, leave: 0
+id: 4, score: 40, leave: 1
+
+2-1
+id: 1, score: 40, leave: 3
+id: 2, score: 79, leave: 2
+id: 3, score: 80, leave: 3
+id: 5, score: 40, leave: 0
+
+2-2
+id: 1, score: 30, leave: 0
+id: 3, score: 40, leave: 1
+
+2-3
+id: 2, score: 70, leave: 1
+id: 3, score: 29, leave: 1
+id: 4, score: 80, leave: 0
+
+1-1
+id: 1, score: 90, leave: 3
+id: 3, score: 70, leave: 2
+id: 4, score: 60, leave: 1
+
+1-2
+id: 1, score: 90, leave: 3
+id: 2, score: 89, leave: 0
+id: 4, score: 40, leave: 1
+
+2-1
+id: 3, score: 80, leave: 3
+id: 2, score: 79, leave: 2
+id: 1, score: 40, leave: 3
+
+2-2
+id: 3, score: 40, leave: 1
+id: 1, score: 30, leave: 0
+
+2-3
+id: 4, score: 80, leave: 0
+id: 2, score: 70, leave: 1
+id: 3, score: 29, leave: 1
+
+id: 1, score: 90, leave: 3
+id: 1, score: 90, leave: 3
+id: 2, score: 89, leave: 0
+
+1-1
+id: 1, score: 90, leave: 3
+id: 3, score: 70, leave: 2
+id: 2, score: 59, leave: 0
+id: 4, score: 60, leave: 1
+
+1-2
+id: 1, score: 90, leave: 3
+id: 2, score: 89, leave: 0
+id: 4, score: 40, leave: 1
+
+2-1
+id: 3, score: 80, leave: 3
+id: 1, score: 40, leave: 3
+id: 2, score: 79, leave: 2
+id: 5, score: 40, leave: 0
+
+2-2
+id: 3, score: 40, leave: 1
+id: 1, score: 30, leave: 0
+
+2-3
+id: 4, score: 80, leave: 0
+id: 2, score: 70, leave: 1
+id: 3, score: 29, leave: 1
+
+1-1-2
+1-2-2
+2-1-5
+2-2-1
+2-3-4
+
+average: 61
+```
+
+<!-- slide -->
+### 題目3 - 框架
+
+``` C
+#include <stdio.h>
+#include <stdlib.h>
+
+void printAllStdent(struct Class* myClass, int classSize) {
+}
+
+void printClassTopThree(struct Class* myClass, int classSize) {
+}
+
+void printSchoolTopThree(struct Class* myClass, int classSize) {
+}
+
+void printAllStdentByClassAndScore(struct Class* myClass, int classSize) {
+}
+
+void printFullAttendance(struct Class* myClass, int classSize) {
+}
+
+void printSchoolAverageScore(struct Class* myClass, int classSize) {
+}
+
+int main() {
+
+	while (1) {
+		int cmd;
+		scanf("%d", &cmd);
+		if (cmd == 1) {
+			printAllStdent(myClass, n);
+		}
+		else if (cmd == 2) {
+			printClassTopThree(myClass, n);
+		}
+		else if (cmd == 3) {
+			printSchoolTopThree(myClass, n);
+		}
+		else if (cmd == 4) {
+			printAllStdentByClassAndScore(myClass, n);
+		}
+		else if (cmd == 5) {
+			printFullAttendance(myClass, n);
+		}
+		else if (cmd == 6) {
+			printSchoolAverageScore(myClass, n);
+		}
+	}
+}
+```
+
+<!-- slide
+### 題目3 - 圖解 -->
+
+<!-- slide -->
+### 題目3 - 程式碼
+
+``` C
+#include <stdio.h>
+#include <stdlib.h>
+
+struct St {
+	int id;
+	int score;
+	int leave;
+};
+
+struct Class {
+	struct St* st;
+	int stSize;
+	int grade;
+	int number;
+};
+
+void printAllStdent(struct Class* myClass, int classSize) {
+	for (int i = 0; i < classSize; i++) {
+		printf("%d-%d\n", myClass[i].grade, myClass[i].number);
+		for (int j = 0; j < myClass[i].stSize; j++) {
+			printf("id: %d, score: %d, leave: %d\n", myClass[i].st[j].id, myClass[i].st[j].score, myClass[i].st[j].leave);
+		}
+		printf("\n");
+	}
+}
+
+void printClassTopThree(struct Class* myClass, int classSize) {
+	for (int i = 0; i < classSize; i++) {
+		printf("%d-%d\n", myClass[i].grade, myClass[i].number);
+		struct St* topThree[3] = {};
+		for (int j = 0; j < myClass[i].stSize; j++) {
+			for (int k = 0; k < 3; k++) {
+				if (!topThree[k]) {
+					topThree[k] = myClass[i].st + j;
+					break;
+				}
+				else if (myClass[i].st[j].score > topThree[k]->score) {
+					for (int l = 2; l >= k; l--) 
+            topThree[l + 1] = topThree[l];
+					topThree[k] = myClass[i].st + j;
+					break;
+				}
+			}
+		}
+		for (int j = 0; j < 3 && topThree[j]; j++) {
+			printf("id: %d, score: %d, leave: %d\n", topThree[j]->id, topThree[j]->score, topThree[j]->leave);
+		}
+		printf("\n");
+	}
+}
+
+void printSchoolTopThree(struct Class* myClass, int classSize) {
+  struct St* topThree[3] = {};
+  for (int i = 0; i < classSize; i++) {
+		for (int j = 0; j < myClass[i].stSize; j++) {
+			for (int k = 0; k < 3; k++) {
+				if (!topThree[k]) {
+					topThree[k] = myClass[i].st + j;
+					break;
+				}
+				else if (myClass[i].st[j].score > topThree[k]->score) {
+					for (int l = 2; l >= k; l--) 
+            topThree[l + 1] = topThree[l];
+					topThree[k] = myClass[i].st + j;
+					break;
+				}
+			}
+		}
+	}
+  for (int i = 0; i < 3 && topThree[i]; i++) {
+    printf("id: %d, score: %d, leave: %d\n", topThree[i]->id, topThree[i]->score, topThree[i]->leave);
+  }
+  printf("\n");
+}
+
+void printAllStdentByClassAndScore(struct Class* myClass, int classSize) {
+  for (int i = 0; i < classSize; i++) {
+		printf("%d-%d\n", myClass[i].grade, myClass[i].number);
+		struct St** sortSt = calloc(myClass[i].stSize, sizeof(struct St*));
+    for (int j = 0; j < myClass[i].stSize; j++) sortSt[j] = myClass[i].st + j;
+		for (int j = 0; j < myClass[i].stSize; j++) {
+      int maxScore = 0, maxIndex;
+			for (int k = j; k < myClass[i].stSize; k++) {
+				if (myClass[i].st[k].score > maxScore) {
+					maxScore = myClass[i].st[k].score;
+          maxIndex = k;
+				}
+			}
+      struct St* tmpSt = sortSt[maxIndex];
+      sortSt[maxIndex] = sortSt[j];
+      sortSt[j] = tmpSt;
+		}
+		for (int j = 0; j < myClass[i].stSize; j++) {
+			printf("id: %d, score: %d, leave: %d\n", sortSt[j]->id, sortSt[j]->score, sortSt[j]->leave);
+		}
+		printf("\n");
+	}
+}
+
+void printFullAttendance(struct Class* myClass, int classSize) {
+  for (int i = 0; i < classSize; i++) {
+		for (int j = 0; j < myClass[i].stSize; j++) {
+			if(myClass[i].st[j].leave == 0)
+        printf("%d-%d-%d\n", myClass[i].grade, myClass[i].number, myClass[i].st[j].id);
+    }
+	}
+  printf("\n");
+}
+
+void printSchoolAverageScore(struct Class* myClass, int classSize) {
+  int sum = 0;
+  int count = 0;
+  for (int i = 0; i < classSize; i++) {
+		for (int j = 0; j < myClass[i].stSize; j++) {
+			sum += myClass[i].st[j].score;
+      count ++;
+    }
+	}
+  printf("average: %d\n", sum / count);
+}
+
+int main() {
+	struct Class* myClass;
+	int n;
+	scanf("%d", &n);
+	myClass = (struct Class*)malloc(sizeof(struct Class) * n);
+	for (int i = 0; i < n; i++) {
+		scanf("%d%d%d", &myClass[i].stSize, &myClass[i].grade, &myClass[i].number);
+		myClass[i].st = (struct St*)malloc(sizeof(struct St) * myClass[i].stSize);
+		for (int j = 0; j < myClass[i].stSize; j++) {
+			scanf("%d%d%d", &myClass[i].st[j].id, &myClass[i].st[j].score, &myClass[i].st[j].leave);
+		}
+	}
+
+	while (1) {
+		int cmd;
+		scanf("%d", &cmd);
+		if (cmd == 1) {
+			printAllStdent(myClass, n);
+		}
+		else if (cmd == 2) {
+			printClassTopThree(myClass, n);
+		}
+		else if (cmd == 3) {
+			printSchoolTopThree(myClass, n);
+		}
+		else if (cmd == 4) {
+			printAllStdentByClassAndScore(myClass, n);
+		}
+		else if (cmd == 5) {
+			printFullAttendance(myClass, n);
+		}
+		else if (cmd == 6) {
+			printSchoolAverageScore(myClass, n);
+		}
+	}
+}
+```
+
 
 <!-- slide -->
 ## union
@@ -397,6 +822,34 @@ union Data{
 +--------------+
 |              |
 +--------------+
+```
+
+<!-- slide -->
+``` C
+union UData{
+  int numInt;
+  double numDouble;
+  float numFloat;
+  long long numLongLong;
+};
+struct SData{
+  int numInt;
+  double numDouble;
+  float numFloat;
+  long long numLongLong;
+};
+int main(){
+  printf("union size: %d\n", sizeof(union UData));
+  printf("struct size: %d\n", sizeof(struct SData));
+}
+```
+
+output
+
+``` text
+
+> union size: 8
+> struct size: 32
 ```
 
 <!-- slide -->
@@ -570,7 +1023,72 @@ int main(){
 <!-- slide -->
 ## enum
 
-### enum
+<!-- slide -->
+### enum-例子
+
+``` C
+#define MON 1
+#define TUES 2
+#define WED 3
+#define THUR 4
+#define FRI 5
+#define SAT 6
+#define SUN 7
+```
+
+<!-- slide -->
+``` C
+enum Week{MON = 1, TUES, WED,THUR,FRI,SAT,SUN };
+```
+
+<!-- slide -->
+``` C
+enum Week{MON = 1, TUES, WED, THUR, FRI, SAT, SUN };
+
+int main(){
+  for(enum Week i = MON; i <= SUN; i++){
+    printf("week: %d\n", i);
+  }
+}
+```
+
+``` output
+week: 1
+week: 2
+week: 3
+week: 4
+week: 5
+week: 6
+week: 7
+```
+
+<!-- slide -->
+如果不給值得話就是從0開始
+
+``` C
+enum Week{MON, TUES, WED, THUR, FRI, SAT, SUN };
+
+int main(){
+  for(enum Week i = MON; i <= SUN; i++){
+    printf("week: %d\n", i);
+  }
+}
+```
+
+``` output
+week: 0
+week: 1
+week: 2
+week: 3
+week: 4
+week: 5
+week: 6
+```
+
+<!-- slide -->
+### enum用途
+
+讓程式看起來比較容易懂
 
 <!-- slide -->
 ## 題目5
@@ -581,4 +1099,82 @@ int main(){
 ### 題目5 - 程式碼
 
 ``` C
+#include <stdio.h>
+#include <stdlib.h>
+
+enum Type{
+  INT_TYPE,
+  DOUBLE_TYPE,
+  FLOAT_TYPE,
+  LONGLONG_TYPE,
+  CHAR_TYPE
+};
+
+union Data{
+  int _int;
+  double _double;
+  float _float;
+  long long _llong;
+  char _char;
+};
+
+typedef struct SData{
+  union Data data;
+  enum Type type;
+} SData;
+
+int main(){
+  int n;
+  scanf("%d", &n);
+  SData *d = (SData*) malloc(sizeof(SData) * n);
+  for(int i = 0; i < n; i++){
+    char type[10];
+    scanf("%s\n", type);
+    if(type[0] == 'i'){
+      d[i].type = INT_TYPE;
+      scanf("%d", &d[i].data._int);
+    }
+    else if(type[0] == 'd'){
+      d[i].type = DOUBLE_TYPE;
+      scanf("%lf", &d[i].data._double);
+    }
+    else if(type[0] == 'f'){
+      d[i].type = FLOAT_TYPE;
+      scanf("%f", &d[i].data._float);
+    }
+    else if(type[0] == 'l'){
+      d[i].type = LONGLONG_TYPE;
+      scanf("%lld", &d[i].data._llong);
+    }
+    else if(type[0] == 'c'){
+      d[i].type = CHAR_TYPE;
+      scanf("%c", &d[i].data._char);
+    }
+  }
+  for(int i = n - 1; i >= 0; i--){
+    switch(d[i].type){
+      case INT_TYPE:
+        printf("%d\n", d[i].data._int);
+        break;
+      case DOUBLE_TYPE:
+        printf("%lf\n", d[i].data._double);
+        break;
+      case FLOAT_TYPE:
+        printf("%f\n", d[i].data._float);
+        break;
+      case LONGLONG_TYPE:
+        printf("%lld\n", d[i].data._llong);
+        break;
+      case CHAR_TYPE:
+        printf("%c\n", d[i].data._char);
+        break;
+    }
+  }
+}
 ```
+
+## 關於判斷相等與assign
+
+* 判斷相等是不行的
+* 但assign是可以的
+  * 只是指標與array只是複製address，跟function一樣
