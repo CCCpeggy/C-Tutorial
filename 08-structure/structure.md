@@ -342,7 +342,7 @@ struct Apple{
     int weight;
     int price;
 };
-typedef struct Apple Apple
+typedef struct Apple Apple;
 ```
 
 <!-- slide -->
