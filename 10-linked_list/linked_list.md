@@ -731,7 +731,7 @@ void insert(Node* head, int forwardValue, int newValue){
 <!-- slide vertical=true -->
 在最前面插入node 10
 
-``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1"]}
+``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1.5"]}
  head
 +----+
 |0x01|
@@ -746,13 +746,13 @@ void insert(Node* head, int forwardValue, int newValue){
 
 <!-- slide vertical=true -->
 create 10
-
+<!-- 
 ``` C
 Node *newNode = (Node*) malloc(sizeof(Node));
 newNode -> num = 10;
-```
+``` -->
 
-``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1"]}
+``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1.5"]}
  head        newNode
 +----+       +----+----+
 |0x01|       | 10 |    |
@@ -766,11 +766,11 @@ newNode -> num = 10;
 ```
 
 <!-- slide vertical=true -->
-``` C
+<!-- ``` C
 newNode -> next = head;
-```
+``` -->
 
-``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1"]}
+``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1.5"]}
  head        newNode
 +----+       +----+----+
 |0x01|       | 10 |0x01|
@@ -786,11 +786,11 @@ newNode -> next = head;
 ```
 
 <!-- slide vertical=true -->
-``` C
+<!-- ``` C
 head = newNode;
-```
+``` -->
 
-``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1"]}
+``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1.5"]}
  head        newNode
 +----+       +----+----+
 |0x05+------>| 10 |0x01|
@@ -808,7 +808,7 @@ head = newNode;
 <!-- slide vertical=true -->
 相當於
 
-``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1"]}
+``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1.5"]}
  head
 +----+
 |0x01|
@@ -895,10 +895,10 @@ Node* insertHead(Node* head, int value){
 ```
 
 <!-- slide vertical=true -->
-``` C
+<!-- ``` C
 current = head;
 if (current -> next -> num == 14) // 不成立
-```
+``` -->
 
 ``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1"]}
  head
@@ -921,10 +921,10 @@ if (current -> next -> num == 14) // 不成立
 ```
 
 <!-- slide vertical=true -->
-``` C
+<!-- ``` C
 current = current -> next;
 if (current -> next -> num == 14) // 成立
-```
+``` -->
 
 ``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1"]}
  head
@@ -949,10 +949,10 @@ if (current -> next -> num == 14) // 成立
 <!-- slide vertical=true -->
 將current的next指向current的next的next
 
-``` C
+<!-- ``` C
 Node *newNode = (Node*) malloc(sizeof(Node));
 newNode -> next = newNode -> next -> next;
-```
+``` -->
 
 ``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1"]}
  head 
@@ -963,7 +963,7 @@ newNode -> next = newNode -> next -> next;
   |                  |                   |
   v                  |                   v
 +----+----+  +----+--+-+ +----+----+  +----+----+
-| 11 |0x02+->| 12 |0x03+ | 14 |0x04+->| 15 |    |
+| 11 |0x02+->| 12 |0x04+ | 14 |0x04+->| 15 |    |
 +----+----+  +----+----+ +----+----+  +----+----+
  0x01         0x02         0x03         0x04
 ```
@@ -983,6 +983,9 @@ newNode -> next = newNode -> next -> next;
 +----+----+  +----+----+  +----+----+
  0x01         0x02          0x04
 ```
+
+<!-- slide vertical=true -->
+* 指向address做insert
 
 <!-- slide -->
 ## 刪除最面的node

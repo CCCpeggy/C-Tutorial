@@ -1,7 +1,7 @@
 <!-- slide -->
 ## 題目
 
-<!-- slide -->
+<!-- slide vertical = true-->
 ### 題目 - 輸入
 
 ``` text
@@ -12,16 +12,16 @@
 ``` text
 ```
 
-<!-- slide -->
+<!-- slide vertical = true-->
 ### 題目 - 框架
 
 ``` C
 ```
 
-<!-- slide -->
+<!-- slide vertical = true-->
 ### 題目 - 圖解
 
-<!-- slide -->
+<!-- slide vertical = true-->
 ### 題目 - 程式碼
 
 ``` C
