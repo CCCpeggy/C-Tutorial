@@ -110,3 +110,82 @@ int main(){
   printf("%s\n", gate(1, 0, xorGate) ? "True" : "False");
 }
 ```
+
+<!-- slide -->
+## 題目2
+
+寫一個函式輸出泛型的陣列中的值
+
+### 題目2 - 輸出
+
+``` text
+0 1 2 3 4 
+hello world
+1.1 2.2 3.3 4.4
+```
+
+<!-- slide vertical = true-->
+### 題目2 - 框架
+
+``` C
+#include <stdio.h>
+
+void printInt(void* var){
+    printf("%d ", *(int*)var);
+}
+
+void printChar(void* var){
+    printf("%c", *(char*)var);
+}
+
+void printDouble(void* var){
+    printf("%.1lf ", *(double*)var);
+}
+
+void print(void *array, int arraySize, int typeSize, void (*printFunc)(void*)){
+}
+
+int main(){
+    int intArr[] = {0, 1, 2, 3, 4};
+    char charArr[] = "hello world";
+    double doubleArr[] = {1.1, 2.2, 3.3, 4.4};
+    print(intArr, sizeof(intArr) / sizeof(int), sizeof(int), printInt);
+    print(charArr, sizeof(charArr) / sizeof(char), sizeof(char), printChar);
+    print(doubleArr, sizeof(doubleArr) / sizeof(double), sizeof(double), printDouble);
+}
+```
+
+<!-- slide vertical = true-->
+### 題目2 - 程式碼
+
+``` C
+#include <stdio.h>
+
+void printInt(void* var){
+    printf("%d ", *(int*)var);
+}
+
+void printChar(void* var){
+    printf("%c", *(char*)var);
+}
+
+void printDouble(void* var){
+    printf("%.1lf ", *(double*)var);
+}
+
+void print(void *array, int arraySize, int typeSize, void (*printFunc)(void*)){
+    for(int i = 0; i < arraySize; i++){
+        printFunc(array + i * typeSize);
+    }
+    printf("\n");
+}
+
+int main(){
+    int intArr[] = {0, 1, 2, 3, 4};
+    char charArr[] = "hello world";
+    double doubleArr[] = {1.1, 2.2, 3.3, 4.4};
+    print(intArr, sizeof(intArr) / sizeof(int), sizeof(int), printInt);
+    print(charArr, sizeof(charArr) / sizeof(char), sizeof(char), printChar);
+    print(doubleArr, sizeof(doubleArr) / sizeof(double), sizeof(double), printDouble);
+}
+```

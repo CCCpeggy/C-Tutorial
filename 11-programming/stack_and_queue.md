@@ -3,7 +3,7 @@
 
 <!-- slide vertical -->
 * stack - 先進後出
-  * 例如：蝶盤子
+  * 例如：疊盤子
 * queue - 先進先出
   * 例如：排隊
 
@@ -162,7 +162,7 @@ int main(){
 
 <!-- slide vertical -->
 
-``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1.5"]}
+``` ditaa {cmd=true args=["-E", "-S", "-t", "1", "-s", "1"]}
      +---+
 head |   |
      +---+
@@ -566,30 +566,31 @@ push 1
 ``` C
 #include <stdio.h>
 
-void push(int num){
+void push(int array[12], int size, int num){
 }
 
-void pop(){
+void pop(int array[12], int size){
 }
 
-void print(){
+void print(int array[12], int size){
 }
 
 int main(){
-  push(9);
-  print();
-  push(8);
-  print();
-  push(3);
-  print();
-  push(5);
-  print();
-  pop();
-  print();
-  pop();
-  print();
-  push(1);
-  print();
+  int array[12], size;
+  push(array, size, 9);
+  print(array, size);
+  push(array, size, 8);
+  print(array, size);
+  push(array, size, 3);
+  print(array, size);
+  push(array, size, 5);
+  print(array, size);
+  pop(array, size);
+  print(array, size);
+  pop(array, size);
+  print(array, size);
+  push(array, size, 1);
+  print(array, size);
 }
 ```
 
