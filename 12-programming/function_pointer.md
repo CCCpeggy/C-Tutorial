@@ -116,6 +116,7 @@ int main(){
 
 寫一個函式輸出泛型的陣列中的值
 
+<!-- slide vertical = true-->
 ### 題目2 - 輸出
 
 ``` text
