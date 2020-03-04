@@ -172,7 +172,7 @@ void main() {
 
 <!-- slide vertical = true-->
 ``` C++
-int a[3] = {10, 20, 30};
+int arr[3] = {10, 20, 30};
 ```
 
 <!-- slide vertical = true-->
@@ -181,7 +181,7 @@ int a[3] = {10, 20, 30};
                 arr
                  |
                  v
-+=-----+=-----+------+------+------+------+=-----+
++=-----+=-----+------+------+------+=-----+=-----+
 |      |      |      |      |      |      |      |
 |  XX  |  XX  |  10  |  20  |  30  |  XX  |  XX  |
 |      |      |      |      |      |      |      |
@@ -258,9 +258,9 @@ ptr++;
 |  XX  |  XX  |  10  |  20  |  30  | 0x0D |  XX  |
 |      |      |      |      |      |      |      |
 +------+------+------+------+------+-----++------+
-  0X01   0X05   0X09   0X0D^   0X11   0X15|  0X19
-                           |              |
-                           +--------------+
+  0X01   0X05   0X09   0X0D^  0X11   0X15|  0X19
+                           |             |
+                           +-------------+
 ```
 
 <!-- slide vertical = true-->
@@ -272,10 +272,30 @@ ptr++;
 輸出陣列中的值
 
 <!-- slide vertical = true-->
-```C++
+```C
 #include <stdio.h>
 void printArray(int *arr, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", *(arr + i));
+    }
+    printf("\n");
+}
+int main() {
+    int arr[] = {1, 2, 3, 4, 5, 6};
+    printArray(arr, 6);
+}
+```
 
+<!-- slide vertical = true-->
+### 陣列輸出練習 - 參考答案1
+
+```C
+#include <stdio.h>
+void printArray(int *arr, int size) {
+    for (int i = 0; i < size; i++, arr++) {
+        printf("%d ", *arr);
+    }
+    printf("\n");
 }
 int main() {
     int arr[] = {1, 2, 3, 4, 5, 6};
@@ -288,33 +308,43 @@ int main() {
 
 在函式中呼叫自己
 
-<!-- slide -->
+<!-- slide vertical = true-->
 ### 應用
 
 大問題切成小問題做
 
 <!-- slide vertical = true-->
-### 請撰寫盒內塔
+### 計算次方
 
-![盒內塔](../../../image/2020-03-01-23-28-59.png)
+請使用遞迴撰寫計算次方的function
 
-<!-- slide vertical = true-->
-#### 盒內塔 - 範例輸入
-
-``` text
-3
+``` C
+#include <stdio.h>
+int pow(int num, int times) {
+}
+void main() {
+  int n, times;
+  while(scanf("%d%d", &n, &times) != EOF) {
+    printf("%d\n", pow(n, times));
+  }
+}
 ```
 
-#### 盒內塔 - 範例輸出
+<!-- slide vertical = true-->
+### 計算次方 - 參考答案
 
-``` text
-Move disk 1 From tower 2 to tower 1
-Move disk 2 From tower 2 to tower 3
-Move disk 1 From tower 1 to tower 3
-Move disk 3 From tower 2 to tower 1
-Move disk 1 From tower 3 to tower 2
-Move disk 2 From tower 3 to tower 1
-Move disk 1 From tower 2 to tower 1
+``` C
+#include <stdio.h>
+int pow(int num, int times) {
+    if (times) return pow(num, times - 1) * num;
+    return 1;
+}
+void main() {
+  int n, times;
+  while(scanf("%d%d", &n, &times) != EOF) {
+    printf("%d\n", pow(n, times));
+  }
+}
 ```
 
 <!-- slide -->
@@ -408,8 +438,9 @@ print
 ```
 
 <!-- slide -->
-## 總練習
+## 應用練習
 
+<!-- slide vertical = true-->
 ### 題目1
 
 輸入一串字串，其中包含`{ }`, `( )`, `[ ]`，判斷字串中前面列出的這三種符號是否平衡
@@ -422,6 +453,7 @@ print
 ()
 ()[]
 [(])
+[35DV{}]
 ```
 
 #### 題目1 - 範例輸出
@@ -431,17 +463,115 @@ balanced
 balanced
 balanced
 not balanced
+balanced
 ```
 
+<!-- slide vertical = true-->
+#### 題目1 - 範例程式
+
+``` C
+
+```
+
+<!-- slide vertical = true-->
 ### 題目2
+
+輸入一個數字N，代表總共有N個人
+而這N個人當中，每個人都會有自己的編號
+每個人的編號不重複且介於0~N-1之間
+
+他們每個人都訂了便當，為了公平起見
+當他們要輪流拿邊當時，採用每次跳三個未拿到便當的號碼
+所以就會是0, 3, 6, 9....
+請輸出他們拿便當的順序
 
 <!-- slide vertical = true-->
 #### 題目2 - 範例輸入
 
 ``` text
+20
 ```
 
 #### 題目2 - 範例輸出
 
 ``` text
+0 3 6 9 12 15 18 1 5 10 14 19 4 11 17 7 16 8 2 13
+```
+
+<!-- slide vertical = true-->
+#### 題目2 - 範例程式
+
+``` C
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int num;
+    struct Node *next;
+};
+
+int main() {
+    int N;
+    scanf("%d", &N);
+    struct Node *head;
+    struct Node **ptr = &head;
+    for (int i = 0; i < N; i++) {
+        *ptr = (struct Node *)malloc(sizeof(struct Node));
+        (*ptr) -> num = i;
+        ptr = &((*ptr) -> next);
+    }
+
+    *ptr = head;
+    ptr = &head;
+    for (int i = 0; i < N; i++) {
+        printf("%d ", (*ptr) -> num);
+        *ptr = (*ptr) -> next;
+        ptr = &((*ptr) -> next -> next);
+    }
+}
+```
+
+<!-- slide vertical = true-->
+### 題目3
+
+請撰寫盒內塔
+
+![盒內塔](../../../image/2020-03-01-23-28-59.png)
+
+<!-- slide vertical = true-->
+#### 題目3 - 範例輸入
+
+``` text
+3
+```
+
+#### 題目3 - 範例輸出
+
+``` text
+Move disk 1 From tower 2 to tower 1
+Move disk 2 From tower 2 to tower 3
+Move disk 1 From tower 1 to tower 3
+Move disk 3 From tower 2 to tower 1
+Move disk 1 From tower 3 to tower 2
+Move disk 2 From tower 3 to tower 1
+Move disk 1 From tower 2 to tower 1
+```
+
+<!-- slide vertical = true-->
+#### 題目3 - 範例程式
+
+``` C
+#include <stdio.h>
+void HanoiTowers(int a, int b, int c, int n){
+    if (n == 0) return;
+    HanoiTowers(a, c, b, n - 1);
+    printf("Move disk %d From tower %d to tower %d\n", n, a, c);
+    HanoiTowers(b, a, c, n - 1);
+}
+int main(){
+    int n;
+    while(scanf("%d", &n) != EOF){
+        HanoiTowers(2, 3, 1, n);
+    }
+}
 ```
