@@ -470,7 +470,32 @@ balanced
 #### 題目1 - 範例程式
 
 ``` C
+#include <stdio.h>
+#define MAX 100
 
+int main() {
+    char str[MAX];
+    while (scanf("%s", str) != EOF) {
+        int stackIdx = 0;
+        char stack[MAX];
+        int correct = 1;
+        for (int i = 0; str[i] && correct; i++) {
+            if (str[i] == '[' || str[i] == '{' || str[i] == '(') {
+                stack[stackIdx++] = str[i];
+            }
+            else if (str[i] == ']' && stack[--stackIdx] != '[') {
+                correct = 0;
+            }
+            else if (str[i] == '}' && stack[--stackIdx] != '{') {
+                correct = 0;
+            }
+            else if (str[i] == ')' && stack[--stackIdx] != '(') {
+                correct = 0;
+            }
+        }
+        printf("%sbalanced\n", correct && !stackIdx ? "" : "not ");
+    }
+}
 ```
 
 <!-- slide vertical = true-->
