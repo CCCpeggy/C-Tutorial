@@ -11,3 +11,11 @@ Write a recursive program to determine whether a given series of parentheses pai
 ## 變化盒內塔
 
 You are given a pile of discs which alternate in color and are arranged from the largest disc at the bottom to the smallest at the top, as shown in Figure 1 below. You are required to recursively move the discs from the first peg to the second peg and use the third peg as an auxiliary peg. During the course of moving the discs, you cannot place a larger disc above a small disc and you cannot place blue disc above a green disc.
+
+## 反矩陣 and 矩陣相乘
+
+Write a program to compute the inverse of a square matrix. Once you have computed the inverse, multiply it by the original matrix to produce the identity matrix. Ask the user for the size of the matrix and then fill the matrix with random numbers. Output must consist of the original matrix and its inverse, and the product of these two matrices, which must be the identity matrix of the same size.
+
+## 開根號
+
+Compute the square root of 2 to 100 decimal places with the aid of arrays. You must use pointer when operating on the arrays.
